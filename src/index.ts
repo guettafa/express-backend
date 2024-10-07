@@ -15,7 +15,7 @@ app.get("/", (req: Request, res: Response) => {
 
 // /products
 app.use("/products", productsRoutes)
-app.use("/", usersRoutes)
+app.use("/users", usersRoutes)
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
