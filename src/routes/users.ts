@@ -1,11 +1,10 @@
 import express, {NextFunction, Request, Response} from "express";
 
-import jwt, { Secret } from "jsonwebtoken";
-import bcrypt from "bcryptjs"
-
 import { User } from "../models/user";
-
 import { config } from "../config/config";
+
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs"
 
 const router = express.Router();
 
