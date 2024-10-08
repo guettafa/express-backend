@@ -3,14 +3,13 @@ import express, {NextFunction, Request, Response} from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"
 
+import { User } from "../models/user";
+
 const router = express.Router();
 
-interface User {
-    username: string;
-    password: string;
-}
-
+// Fake data
 const users: User[] = [];
+
 const SECRET_KEY = "k3llyR0s3tr1ckster";
 
 router.post("/login", async (req: Request, res: Response) => {

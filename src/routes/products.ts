@@ -1,23 +1,30 @@
 import express, {Request, Response} from "express";
 
-const router = express.Router()
+import { Product } from "../models/product";
+
+const router = express.Router();
+
+const products: Product[] = [];
 
 // GET
-router.get("/", (req: Request, res: Response) => {
-    res.send("All the products");
+router.get("/", async (req: Request, res: Response) => {
+    res.send(products);
 });
 
 // POST
-router.post("/", (req: Request, res: Response) => {
-    // post new product    
+router.post("/", async (req: Request, res: Response) => {
+    const product: Product = req.body;
+    products.push(product);
+    res.json({message: "Product added successfully"});
 });
 
 // GET BY ID
-router.get("/:id", (req: Request, res: Response) => {
-    try {
-        req.params.id
-    } catch (error) {
-       res.send() // SEND 404 
+router.get("/:id", async (req: Request, res: Response) => {
+    const product: Product = products.find(p => p.id.toString() === req.params.id)!; 
+    if (!product) {
+        res.status(404).json({message: "Product not found"});
+    } else {
+        res.json(product);
     }
 })
 
