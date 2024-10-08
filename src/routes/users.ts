@@ -1,16 +1,20 @@
 import express, {NextFunction, Request, Response} from "express";
 
-import jwt from "jsonwebtoken";
+import jwt, { Secret } from "jsonwebtoken";
 import bcrypt from "bcryptjs"
 
 import { User } from "../models/user";
 
+import { config } from "../config/config";
+
 const router = express.Router();
 
 const users: User[] = [];
-const SECRET_KEY = "k3llyR0s3tr1ckster";
+
+const SECRET_KEY = config.jwt_secret;   
 
 router.post("/login", async (req: Request, res: Response) => {
+
     const {username, password} = req.body;
     const user: User = users.find(u => u.username === username)!;
     
@@ -20,7 +24,7 @@ router.post("/login", async (req: Request, res: Response) => {
         if (await bcrypt.compare(password, user.password)) {
             const token = jwt.sign(
                 {username: user.username}, 
-                SECRET_KEY, 
+                SECRET_KEY as string, 
                 { expiresIn: "1h"}
             );
             res.json(`Bearer ${token}`);
@@ -33,9 +37,6 @@ router.post("/login", async (req: Request, res: Response) => {
 router.post("/register", async (req: Request, res: Response) => {
     const {username, password} = req.body;
     const hashedPassword = await bcrypt.hash(password, 15);
-
-    console.log("Username :", username);
-    console.log("Password:", hashedPassword);
 
     users.push({
         username: username,
@@ -55,7 +56,7 @@ const checkAccess = (req: any, res: Response, next: NextFunction) => {
         // Token found
 
         // Separate Bearer and token
-        jwt.verify(token?.split(' ')[1], SECRET_KEY, (error: any, decoded: any) => {
+        jwt.verify(token?.split(' ')[1], SECRET_KEY as string, (error: any, decoded: any) => {
             if (error) {
                 res.status(403).json("Invalid Token")
             }
