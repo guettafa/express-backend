@@ -3,12 +3,9 @@ import express, {NextFunction, Request, Response} from "express";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs"
 
-const router = express.Router();
+import { User } from "../models/user";
 
-interface User {
-    username: string;
-    password: string;
-}
+const router = express.Router();
 
 const users: User[] = [];
 const SECRET_KEY = "k3llyR0s3tr1ckster";
