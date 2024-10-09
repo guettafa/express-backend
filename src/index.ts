@@ -1,6 +1,8 @@
 import express, { Request, Response } from "express";
+
 import productsRoutes from "./routes/products.route";
 import usersRoutes from "./routes/users.route";
+import authRoutes from "./routes/auth.route";
 
 import { config } from "./config/config";
 
@@ -20,6 +22,7 @@ app.use("/products", productsRoutes)
 
 // Users
 app.use("/users", usersRoutes)
+app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

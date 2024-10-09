@@ -1,54 +1,24 @@
 import express, {Request, Response} from "express";
 
 import { User } from "../models/user";
-import { config } from "../config/config";
-
-import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs"
 import { checkAccess } from "../middlewares/auth";
 
 const router = express.Router();
 
 const users: User[] = [];
 
-const SECRET_KEY = config.jwt_secret;   
-
-router.post("/login", async (req: Request, res: Response) => {
-
-    const {username, password} = req.body;
-    const user: User = users.find(u => u.username === username)!;
-    
-    if (!user) {
-        res.status(404).json("No user with those informations can be found")
-    } else {
-        if (await bcrypt.compare(password, user.password)) {
-            const token = jwt.sign(
-                {username: user.username}, 
-                SECRET_KEY as string, 
-                { expiresIn: "1h"}
-            );
-            res.json(`Bearer ${token}`);
-        } else {
-            res.status(400).json("Wrong Password") 
-        }
-    }
-})
-
-router.post("/register", async (req: Request, res: Response) => {
-    const {username, password} = req.body;
-    const hashedPassword = await bcrypt.hash(password, 15);
-
-    users.push({
-        username: username,
-        password: hashedPassword
-    });
-    res.json({message: "Account created successfully"})
-})
-
-
-// This is a protected route
+// Authenticated routes 
 router.get("/", checkAccess, (req: Request, res: Response) => {
     res.json(users);
 });
 
+// Open routes
+router.get("/:username", (req: Request, res: Response) => {
+    const user = users.find(u => u.username === req.params.username); 
+    if (!user) {
+        res.status(404).json({message: "User not found"});
+    } else {
+        res.json(user);
+    }
+});
 export default router;
