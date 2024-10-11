@@ -6,8 +6,18 @@ import authRoutes from "./routes/auth.route";
 
 import { config } from "./config/config";
 
+import { Product } from "./models/product";
+import fs from "fs";
+
 const app = express();
 const PORT = config.port;
+
+const someTest = async ()  => {
+    const product: Product = await fetch('https://fakestoreapi.com/products/1')
+        .then(res=>res.json())
+        .then(json=>console.log(json)!);
+    console.log(product);
+}
 
 // Parse Responses to JSON 
 app.use(express.json()),
@@ -25,9 +35,7 @@ app.use("/users", usersRoutes)
 app.use("/auth", authRoutes);
 
 app.listen(PORT, () => {
-    fetch('https://fakestoreapi.com/products/1')
-            .then(res=>res.json())
-            .then(json=>console.log(json))
+    someTest();
     console.log(`Listening on port ${PORT}`);
 });
 
