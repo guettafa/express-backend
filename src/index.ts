@@ -18,6 +18,9 @@ app.use("/products", productsRoutes)
 app.use("/users", usersRoutes)
 
 app.listen(PORT, () => {
+    fetch('https://fakestoreapi.com/products/1')
+            .then(res=>res.json())
+            .then(json=>console.log(json))
     console.log(`Listening on port ${PORT}`);
 });
 
