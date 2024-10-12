@@ -21,6 +21,8 @@ export const addProduct = (product: Product): string => {
         price: product.price
     }); 
 
+    console.log(products);
+    
     saveJSON(products);
     return "Added Successfully";
 }
