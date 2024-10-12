@@ -12,17 +12,13 @@ import fs from "fs";
 const app = express();
 const PORT = config.port;
 
+// To add products at the beginning
 const addSampleProducts = async ()  => {
     let products: Product[] = [];
     await fetch('https://fakestoreapi.com/products/4')
         .then(res=>res.json())
         .then(json=>products.push(json)!);
-
-    console.log(products);
-    // fs.writeFileSync("./src/data/products.json", JSON.stringify(product));
-
-    // productArray.push(product);
-    // console.log(product);
+    fs.writeFileSync("./src/data/products.json", JSON.stringify(products));
 }
 
 // Parse Responses to JSON 
