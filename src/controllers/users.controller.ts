@@ -9,13 +9,16 @@ export const getUsers = (): User[] => {
    return users;
 }
 
-export const getUser = (id: number) => {
+export const getUser = (username: string): User => {
+    return users.find(u => u.username === username)!
 }
 
-export const deleteUser = (id: number) => {
-    const user = getUser(id);
+export const deleteUser = (username: string) => {
+    const user: User = getUser(username);
+    saveJSON<User>(users, PATH_JSON_USERS);
 }
 
-export const updateUser = (id: number) => {
-    
+export const updateUser = (username: string) => {
+    const user: User = getUser(username);
+    saveJSON<User>(users, PATH_JSON_USERS);
 }
