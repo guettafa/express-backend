@@ -9,8 +9,8 @@ export const getUsers = (): User[] => {
    return users;
 }
 
-export const getUser = (username: string): User => {
-    return users.find(u => u.username === username)!
+export const getUser = (usernameOrEmail: string): User => {
+    return users.find(u => u.username === usernameOrEmail || u.email === usernameOrEmail)!;
 }
 
 export const deleteUser = (username: string) => {
