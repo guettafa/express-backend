@@ -1,7 +1,7 @@
 import express, {Request, Response} from "express";
 
 import { User } from "../models/user";
-import { checkAccess } from "../middlewares/auth";
+import { checkAccess } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 

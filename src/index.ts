@@ -18,6 +18,7 @@ const addSampleProducts = async ()  => {
     await fetch('https://fakestoreapi.com/products/4')
         .then(res=>res.json())
         .then(json=>products.push(json)!);
+
     fs.writeFileSync("./src/data/products.json", JSON.stringify(products));
 }
 
@@ -29,9 +30,11 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
-app.use("/products", productsRoutes)
+
+app.use("/products", productsRoutes, )
 app.use("/users", usersRoutes)
 app.use("/auth", authRoutes);
+
 
 app.listen(PORT, () => {
     addSampleProducts();
