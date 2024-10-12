@@ -4,7 +4,7 @@ import { Product } from "../models/product";
 
 const router = express.Router();
 
-// GET
+// GET ALL
 router.get("/", async (req: Request, res: Response) => {
     res.json(getProducts());
 });
@@ -29,10 +29,10 @@ router.post("/", async (req: Request, res: Response) => {
     }
 });
 
-// UPDATE by ID
+// UPDATE
 router.put("/:id", async (req: Request, res: Response) => {
     try {
-        res.json({message: updateProduct(req.params.id)});
+        res.status(200).json({message: updateProduct(req.params.id)});
     } catch (error) {
         res.status(500).json({message: error});
     }
@@ -41,7 +41,7 @@ router.put("/:id", async (req: Request, res: Response) => {
 // DELETE
 router.delete("/:id", async (req: Request, res: Response) => {
     try {
-        res.json({message: deleteProduct(req.params.id)});
+        res.status(204).json({message: deleteProduct(req.params.id)});
     } catch (error) {
         res.status(404).json({message: `Product not found - ${error}`});
     }

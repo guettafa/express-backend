@@ -12,8 +12,8 @@ const users : User[] = [];
 
 router.post("/login", async (req: Request, res: Response) => {
 
-    const {username, password} = req.body;
-    const user: User = users.find(u => u.username === username)!;
+    const {usernameOrEmail, password} = req.body;
+    const user: User = users.find(u => u.username === usernameOrEmail || u.email === usernameOrEmail)!;
     
     if (!user) {
         res.status(404).json("No user with those informations can be found")
@@ -32,11 +32,12 @@ router.post("/login", async (req: Request, res: Response) => {
 })
 
 router.post("/register", async (req: Request, res: Response) => {
-    const {username, password} = req.body;
+    const {username, email, password} = req.body;
     const hashedPassword = await bcrypt.hash(password, 15);
 
     users.push({
         username: username,
+        email: email,
         password: hashedPassword
     });
     res.json({message: "Account created successfully"})

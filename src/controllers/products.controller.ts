@@ -1,4 +1,5 @@
 
+import { NotFoundError } from "rxjs";
 import { Product } from "../models/product";
 import { readJSON, saveJSON } from "../utils/productUtils";
 
@@ -36,9 +37,11 @@ export const updateProduct = (id: string): string => {
 }
 
 export const deleteProduct = (id: string): string => {
-    const product = products.indexOf(getProduct(id));
-    products.splice(product,1); // delete product
-
+    const productId = products.indexOf(getProduct(id));
+    if (productId === -1) {
+        throw new Error(`There's no product with the id ${id}`);
+    }
+    products.splice(productId,1); // delete product
     saveJSON(products);
     return "Deleted Successfully";
 }
