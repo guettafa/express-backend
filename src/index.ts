@@ -5,9 +5,7 @@ import usersRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 
 import { config } from "./config/config";
-
 import { Product } from "./models/product";
-import fs from "fs";
 
 const app = express();
 const PORT = config.port;
