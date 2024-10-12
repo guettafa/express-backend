@@ -29,10 +29,7 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
-// Products
 app.use("/products", productsRoutes)
-
-// Users
 app.use("/users", usersRoutes)
 app.use("/auth", authRoutes);
 

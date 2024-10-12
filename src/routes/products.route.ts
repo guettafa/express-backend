@@ -4,7 +4,8 @@ import { Product } from "../models/product";
 import fs from "fs";
 
 const router = express.Router();
-const products = fs.readFileSync("./src/data/products.json");
+const PATH_JSON_PRODUCTS = "./src/data/products.json";
+const products: Product[] = JSON.parse(fs.readFileSync(PATH_JSON_PRODUCTS).toString());
  
 // GET
 router.get("/", async (req: Request, res: Response) => {
@@ -14,21 +15,23 @@ router.get("/", async (req: Request, res: Response) => {
 // POST
 router.post("/", async (req: Request, res: Response) => {
     const product: Product = req.body;
-    fs.writeFileSync("../data/products.json", products);
+    products.push(product); // Add item to array of products
+
+    fs.writeFileSync(PATH_JSON_PRODUCTS, JSON.stringify(products));
     res.json({message: "Product added successfully"});
 });
 
 // GET BY ID
 router.get("/:id", async (req: Request, res: Response) => {
-    // const product: Product = products.find(p => p.id.toString() === req.params.id)!; 
-    // if (!product) {
-    //     res.status(404).json({message: "Product not found"});
-    // } else {
-    //     res.json(product);
-    // }
+    const product: Product = products.find(p => p.id.toString() === req.params.id)!; 
+    if (!product) {
+        res.status(404).json({message: "Product not found"});
+    } else {
+        res.json(product);
+    }
 })
 
-// PUT by ID
+// UPDATE by ID
 router.put("/:id", (req: Request, res: Response) => {
 })
 
