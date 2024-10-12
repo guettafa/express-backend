@@ -1,8 +1,10 @@
 
 import { Product } from "../models/product";
-import { readJSON, saveJSON } from "../utils/productUtils";
+import { readJSON, saveJSON } from "../utils/jsonHelper";
 
-let products: Product[] = readJSON();
+const PATH_JSON_PRODUCTS = "./src/data/products.json";
+
+let products: Product[] = readJSON<Product>(PATH_JSON_PRODUCTS);
 
 export const getProducts = (): Product[] => {
     return products;
@@ -23,7 +25,7 @@ export const addProduct = (product: Product): string => {
 
     console.log(products);
     
-    saveJSON(products);
+    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Added Successfully";
 }
 
@@ -39,6 +41,6 @@ export const deleteProduct = (id: string): string => {
     const product = products.indexOf(getProduct(id));
     products.splice(product,1); // delete product
 
-    saveJSON(products);
+    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Deleted Successfully";
 }

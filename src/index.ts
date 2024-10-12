@@ -6,10 +6,11 @@ import authRoutes from "./routes/auth.route";
 
 import { config } from "./config/config";
 import { Product } from "./models/product";
-import { saveJSON } from "./utils/productUtils";
+import { saveJSON } from "./utils/jsonHelper";
 
 const app = express();
 const PORT = config.port;
+const PATH_JSON_PRODUCTS = "./src/data/products.json";
 
 // To add products at the beginning
 const addSampleProducts = async ()  => {
@@ -24,7 +25,7 @@ const addSampleProducts = async ()  => {
                 price: json.price
             }
         ));
-    saveJSON(products);
+    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
 }
 
 // Parse Responses to JSON 
