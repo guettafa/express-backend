@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { config } from "../config/config";
-import { User } from "../models/user";
+import { Role, User } from "../models/user";
 
 const router = express();
 const SECRET_KEY = config.jwt_secret;
@@ -20,7 +20,7 @@ router.post("/login", async (req: Request, res: Response) => {
     } else {
         if (await bcrypt.compare(password, user.password)) {
             const token = jwt.sign(
-                {username: user.username}, 
+                {username: user.username, role: user.role}, // Infos in JWT 
                 SECRET_KEY as string, 
                 { expiresIn: "1h"}
             );
@@ -38,6 +38,7 @@ router.post("/register", async (req: Request, res: Response) => {
     users.push({
         username: username,
         email: email,
+        role: Role.EMPLOYEE, 
         password: hashedPassword
     });
     res.json({message: "Account created successfully"})
