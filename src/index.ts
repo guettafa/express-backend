@@ -6,8 +6,7 @@ import authRoutes from "./routes/auth.route";
 
 import { config } from "./config/config";
 import { Product } from "./models/product";
-
-import fs from "fs";
+import { saveJSON } from "./utils/productUtils";
 
 const app = express();
 const PORT = config.port;
@@ -15,11 +14,17 @@ const PORT = config.port;
 // To add products at the beginning
 const addSampleProducts = async ()  => {
     let products: Product[] = [];
-    await fetch('https://fakestoreapi.com/products/4')
+    await fetch('https://fakestoreapi.com/products/1')
         .then(res=>res.json())
-        .then(json=>products.push(json)!);
-
-    fs.writeFileSync("./src/data/products.json", JSON.stringify(products));
+        .then(json=>products.push(
+            {
+                id: json.id,
+                title: json.title,
+                description: json.description,
+                price: json.price
+            }
+        ));
+    saveJSON(products);
 }
 
 // Parse Responses to JSON 
@@ -30,11 +35,9 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
-
 app.use("/products", productsRoutes, )
 app.use("/users", usersRoutes)
 app.use("/auth", authRoutes);
-
 
 app.listen(PORT, () => {
     addSampleProducts();

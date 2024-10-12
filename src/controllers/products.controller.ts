@@ -14,7 +14,12 @@ export const getProduct = (id: string): Product => {
 
 export const addProduct = (product: Product): string => {
     // REGEX TO CHECK
-    products.push(product); // Add item to array of products
+    products.push({
+        id: (products.at(-1)?.id!)+1,
+        title: product.title,
+        description: product.description,
+        price: product.price
+    }); 
 
     saveJSON(products);
     return "Added Successfully";
