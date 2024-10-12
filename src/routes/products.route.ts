@@ -33,10 +33,21 @@ router.get("/:id", async (req: Request, res: Response) => {
 
 // UPDATE by ID
 router.put("/:id", (req: Request, res: Response) => {
+    const product: Product = products.find(p => p.id.toString() === req.params.id)!; 
 })
 
 // DELETE by ID
 router.delete("/:id", (req: Request, res: Response) => {
+    const productIndex = products.findIndex(p => p.id.toString() === req.params.id)!;
+    if (!productIndex) {
+        res.status(404).json({message: "Product not found"});
+    } else {
+        products.splice(
+            productIndex,
+            1
+        );
+        res.json(products);
+    }
 })
 
 export default router;
