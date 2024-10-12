@@ -3,17 +3,15 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 import { config } from "../config/config";
-import { Role, User } from "../models/user";
+import { User } from "../models/user";
+import { addUser, getUser } from "../controllers/users.controller";
 
 const router = express();
 const SECRET_KEY = config.jwt_secret;
 
-const users : User[] = [];
-
 router.post("/login", async (req: Request, res: Response) => {
-
     const {usernameOrEmail, password} = req.body;
-    const user: User = users.find(u => u.username === usernameOrEmail || u.email === usernameOrEmail)!;
+    const user: User = getUser(usernameOrEmail);
     
     if (!user) {
         res.status(404).json("No user with those informations can be found")
@@ -33,14 +31,13 @@ router.post("/login", async (req: Request, res: Response) => {
 
 router.post("/register", async (req: Request, res: Response) => {
     const {username, email, password} = req.body;
-    const hashedPassword = await bcrypt.hash(password, 15);
 
-    users.push({
-        username: username,
-        email: email,
-        role: Role.EMPLOYEE, 
-        password: hashedPassword
-    });
+    const hashedPassword = await bcrypt.hash(password, 15);
+    addUser(
+        username, 
+        email, 
+        hashedPassword
+    );
     res.json({message: "Account created successfully"})
 })
 

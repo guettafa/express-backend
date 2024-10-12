@@ -14,11 +14,25 @@ export const checkAccess = (req: any, res: Response, next: NextFunction) => {
         // Separate Bearer and token
         jwt.verify(token?.split(' ')[1], config.jwt_secret as string, (error: any, decoded: any) => {
             if (error) {
-                res.status(403).json({message: "Invalid Token"});
+                res.status(401).json({message: "Invalid Token"});
             }
             // Retrieve token information
             req.user = decoded
             next(); // pass to the next middleware
         })
     }
+}
+
+export const isEmployee = (req: any, res: Response, next: NextFunction) => {
+    if (req.user.role !== 1) {
+        res.status(403).json({message: "You don't have access to this ressource"});
+    }
+    next();
+}
+
+export const isGestionnaire = (req: any, res: Response, next: NextFunction) => {
+    if (req.user.role !== 0) {
+        res.status(403).json({message: "You don't have access to this ressource"});
+    }
+    next();
 }

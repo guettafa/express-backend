@@ -1,5 +1,6 @@
-import { User } from "../models/user";
+import { Role, User } from "../models/user";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
+import bcrypt from "bcryptjs";
 
 const PATH_JSON_USERS = "./src/data/users.json";
 
@@ -11,6 +12,16 @@ export const getUsers = (): User[] => {
 
 export const getUser = (usernameOrEmail: string): User => {
     return users.find(u => u.username === usernameOrEmail || u.email === usernameOrEmail)!;
+}
+
+export const addUser = async (username: string, email: string, hashedPassword: string) => {
+    users.push({
+        username: username,
+        email: email,
+        role: Role.EMPLOYEE, 
+        password: hashedPassword
+    });
+    saveJSON<User>(users, PATH_JSON_USERS);
 }
 
 export const deleteUser = (username: string) => {

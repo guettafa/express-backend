@@ -1,26 +1,22 @@
-import express, {Request, Response} from "express";
+import express, {NextFunction, Request, Response} from "express";
 
 import { User } from "../models/user";
-import { checkAccess } from "../middlewares/auth.middleware";
-import { getUser } from "../controllers/users.controller";
+import { checkAccess, isEmployee } from "../middlewares/auth.middleware";
+import { getUser, getUsers } from "../controllers/users.controller";
 
 const router = express.Router();
 
-const users: User[] = [];
-
 // Authenticated routes 
 router.get("/", checkAccess, (req: Request, res: Response) => {
-    res.json(users);
+    res.json(getUsers());
 });
 
 // Open routes
-router.get("/:username", (req: Request, res: Response) => {
+router.get("/:username", checkAccess, isEmployee, (req: Request, res: Response) => {
     const user = getUser(req.params.username); 
-    if (!user) {
-        res.status(404).json({message: "User not found"});
-    } else {
-        res.json(user);
-    }
+
+    if (!user) res.status(404).json({message: "User not found"});
+    res.json(user);
 });
 
 export default router;
