@@ -10,11 +10,10 @@ export const getUsers = (): User[] => {
 }
 
 export const getUser = (id: number) => {
-    
 }
 
 export const deleteUser = (id: number) => {
-    
+    const user = getUser(id);
 }
 
 export const updateUser = (id: number) => {
