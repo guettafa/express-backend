@@ -23,13 +23,3 @@ export const addUser = (username: string, email: string, hashedPassword: string)
     saveJSON<User>(users, PATH_JSON_USERS);
     return "Account created successfully";
 }
-
-export const deleteUser = (username: string) => {
-    const user: User = getUser(username);
-    saveJSON<User>(users, PATH_JSON_USERS);
-}
-
-export const updateUser = (username: string) => {
-    const user: User = getUser(username);
-    saveJSON<User>(users, PATH_JSON_USERS);
-}

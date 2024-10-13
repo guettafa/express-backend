@@ -21,7 +21,7 @@ router.post("/login", async (req: Request, res: Response) => {
             logger.info(`User ( ${user.username} - ${user.email} ) just logged in`);
         } else {
             res.status(400).json("Wrong Password") 
-            logger.info(`Failed attempt to login to account associated to ${user.email}`)
+            logger.error(`Failed attempt to login to account associated to ${user.email}`)
         }
     }
 })
