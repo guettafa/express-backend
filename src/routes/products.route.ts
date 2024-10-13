@@ -141,14 +141,14 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
  *         description: The product couldn't be added because product informations are in the wrong format
  */
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const productId = req.params.id;
+    const toUpdatePId = req.params.id;
     const product: Product = {...req.body};
     if (isValidProduct(product)) {
-        res.status(200).json({message: updateProduct(productId)});
-        logger.info(`Product with id ${productId} has been updated`);
+        res.status(200).json({message: updateProduct(toUpdatePId, product)});
+        logger.info(`Product with id ${toUpdatePId} has been updated`);
     } else {
         res.status(500).json({message: "Product couldn't be updated"});
-        logger.error(`Couldn't update product with id ${productId}`)
+        logger.error(`Couldn't update product with id ${toUpdatePId}`)
     }
 })
 

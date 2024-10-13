@@ -21,5 +21,5 @@ export const addUser = (username: string, email: string, hashedPassword: string)
         password: hashedPassword
     });
     saveJSON<User>(users, PATH_JSON_USERS);
-    return "Account created successfully";
+    return "Account created sucessfully";
 }

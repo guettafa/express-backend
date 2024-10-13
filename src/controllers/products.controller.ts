@@ -23,13 +23,13 @@ export const addProduct = (product: Product): string => {
         price: product.price
     }); 
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
-    return "Added Successfully";
+    return "Added Sucessfully";
 }
 
-export const updateProduct = (id: string): string => {
+export const updateProduct = (id: string, p: Product): string => {
     const product = getProduct(id);
-    // UPDATE LOGIC
-    return "Updated Successfully";
+    //  TODO 
+    return "Updated Sucessfully";
 }
 
 export const deleteProduct = (id: string): string => {
@@ -39,5 +39,5 @@ export const deleteProduct = (id: string): string => {
     }
     products.splice(productId, 1); // delete product
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
-    return "Deleted Successfully";
+    return `Product with id ${productId} has been deleted with sucess`;
 }
