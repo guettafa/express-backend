@@ -1,6 +1,6 @@
 # .env file content
 
 ```env
-SECRET_KEY=Y0urS3cr3tK3y 
+SECRET_KEY=k3llyR0s3tr1ckster 
 PORT=3000
 ```
