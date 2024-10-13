@@ -5,6 +5,7 @@ import usersRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+import https from "https";
 
 import { envConfig, swaggerOptions } from "./config/config";
 import { Product } from "./models/product";
