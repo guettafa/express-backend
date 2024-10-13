@@ -5,6 +5,8 @@ import { getUser, getUsers } from "../controllers/users.controller";
 
 const router = express.Router();
 
+//  THOSES ARE TESTING ROUTES
+
 // Authenticated routes 
 router.get("/", checkAccess, (req: Request, res: Response) => {
     res.json(getUsers());
