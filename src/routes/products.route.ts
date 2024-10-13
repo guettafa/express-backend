@@ -1,16 +1,17 @@
 import express, {Request, Response, NextFunction} from "express";
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/products.controller";
 import { Product } from "../models/product";
+import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 
 const router = express.Router();
 
 // GET ALL
-router.get("/", async (req: Request, res: Response) => {
+router.get("/", checkAccess, async (req: Request, res: Response) => {
     res.json(getProducts());
 });
 
 // GET BY ID
-router.get("/:id", async (req: Request, res: Response) => {
+router.get("/:id", checkAccess, async (req: Request, res: Response) => {
     const product = getProduct(req.params.id);
     if (!product) {
         res.status(404).json({message: "Product not found"});
@@ -20,7 +21,7 @@ router.get("/:id", async (req: Request, res: Response) => {
 })
 
 // POST
-router.post("/", async (req: Request, res: Response) => {
+router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
     try {
        res.json({message: addProduct(product)});
@@ -30,7 +31,7 @@ router.post("/", async (req: Request, res: Response) => {
 });
 
 // UPDATE
-router.put("/:id", async (req: Request, res: Response) => {
+router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     try {
         res.status(200).json({message: updateProduct(req.params.id)});
     } catch (error) {
@@ -39,7 +40,7 @@ router.put("/:id", async (req: Request, res: Response) => {
 })
 
 // DELETE
-router.delete("/:id", async (req: Request, res: Response) => {
+router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     try {
         res.status(204).json({message: deleteProduct(req.params.id)});
     } catch (error) {

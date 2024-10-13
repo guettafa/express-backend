@@ -23,13 +23,6 @@ export const checkAccess = (req: any, res: Response, next: NextFunction) => {
     }
 }
 
-export const isEmployee = (req: any, res: Response, next: NextFunction) => {
-    if (req.user.role !== 1) {
-        res.status(403).json({message: "You don't have access to this ressource"});
-    }
-    next();
-}
-
 export const isGestionnaire = (req: any, res: Response, next: NextFunction) => {
     if (req.user.role !== 0) {
         res.status(403).json({message: "You don't have access to this ressource"});
