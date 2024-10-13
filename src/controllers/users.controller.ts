@@ -13,7 +13,7 @@ export const getUser = (usernameOrEmail: string): User => {
     return users.find(u => u.username === usernameOrEmail || u.email === usernameOrEmail)!;
 }
 
-export const addUser = (username: string, email: string, hashedPassword: string) => {
+export const addUser = (username: string, email: string, hashedPassword: string): string => {
     users.push({
         username: username,
         email: email,
@@ -21,6 +21,7 @@ export const addUser = (username: string, email: string, hashedPassword: string)
         password: hashedPassword
     });
     saveJSON<User>(users, PATH_JSON_USERS);
+    return "Account created successfully";
 }
 
 export const deleteUser = (username: string) => {

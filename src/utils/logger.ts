@@ -1,8 +1,9 @@
 import winston from "winston";
 
 const LOG_FOLDER = "./src/logs/";
-const ALERT_LOG_FILE = LOG_FOLDER + "alerts.log";
-const ERROR_LOG_FILE = LOG_FOLDER + "errors.log";
+const ALERT_LOG_FILE  = LOG_FOLDER  + "alerts.log";
+const ERROR_LOG_FILE  = LOG_FOLDER  + "errors.log";
+const UPDATE_LOG_FILE = LOG_FOLDER  + "updates.log";
 
 const {combine, timestamp, json} = winston.format;
 
@@ -16,6 +17,10 @@ export const logger = winston.createLogger({
         new winston.transports.File({
             filename: ERROR_LOG_FILE,
             level: 'error'
+        }),
+        new winston.transports.File({
+            filename: UPDATE_LOG_FILE,
+            level: 'info'
         })
     ],
 });

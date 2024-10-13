@@ -31,11 +31,11 @@ router.post("/register", async (req: Request, res: Response) => {
     if (isValidEmail(email)) {
         const hashedPassword = await bcrypt.hash(password, 15);
 
-        addUser(username, email, hashedPassword);
-        res.json({message: "Account Created successfully"});
+        res.json({message: addUser(username, email, hashedPassword)});
         logger.info(`New account has been created with email ${email}`);
     } else {
         res.status(500).json({message: 'Email is in the wrong format'});
+        logger.error("Account couldn't be created because it's in the wrong format");
     }
 })
 
