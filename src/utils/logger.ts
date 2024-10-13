@@ -1,7 +1,7 @@
 import winston from "winston";
 
 const LOG_FOLDER = "./src/logs/";
-const ALERT_LOG_FILE = LOG_FOLDER + "alert.log";
+const ALERT_LOG_FILE = LOG_FOLDER + "alerts.log";
 const ERROR_LOG_FILE = LOG_FOLDER + "errors.log";
 
 const {combine, timestamp, json} = winston.format;

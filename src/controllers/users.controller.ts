@@ -1,5 +1,6 @@
 import { Role, User } from "../models/user";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
+import { validateEmail } from "../utils/regex";
 
 const PATH_JSON_USERS = "./src/data/users.json";
 
@@ -14,6 +15,9 @@ export const getUser = (usernameOrEmail: string): User => {
 }
 
 export const addUser = async (username: string, email: string, hashedPassword: string) => {
+    if (validateEmail(email)) {
+        throw new Error("Email is in a wrong format");
+    }
     users.push({
         username: username,
         email: email,

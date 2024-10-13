@@ -25,27 +25,33 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
     try {
-       res.json({message: addProduct(product)});
+        logger.alert(`New product has been added - ${product.title}`);
+        res.json({message: addProduct(product)});
     } catch (error) {
-       res.status(500).json({message: error}); 
+        res.status(500).json({message: error}); 
     }
 });
 
 // UPDATE
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
+    const productId = req.params.id;
     try {
-        res.status(200).json({message: updateProduct(req.params.id)});
+        logger.alert(`Product with id ${productId} has been updated`);
+        res.status(200).json({message: updateProduct(productId)});
     } catch (error) {
+        logger.error(`Couldn't update product with id ${productId}`)
         res.status(500).json({message: error});
     }
 })
 
 // DELETE
 router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
+    const productId = req.params.id;
     try {
-        res.status(204).json({message: deleteProduct(req.params.id)});
-        logger.alert(`Product with id ${req.params.id} has been deleted`);
+        logger.alert(`Product with id ${productId} has been deleted`);
+        res.status(204).json({message: deleteProduct(productId)});
     } catch (error) {
+        logger.error(`Couldn't delete product with id ${productId}`);
         res.status(404).json({message: `Product not found - ${error}`});
     }
 })
