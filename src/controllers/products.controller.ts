@@ -1,6 +1,5 @@
 import { Product } from "../models/product";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
-import { isValidProduct } from "../utils/regex";
 
 const PATH_JSON_PRODUCTS = "./src/data/products.json";
 
