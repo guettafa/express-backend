@@ -3,16 +3,15 @@ import express, { Request, Response } from "express";
 import productsRoutes from "./routes/products.route";
 import usersRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
+import swaggerUi from 'swagger-ui-express';
+import swaggerJsdoc from 'swagger-jsdoc';
 
 import { envConfig, swaggerOptions } from "./config/config";
 import { Product } from "./models/product";
 import { saveJSON } from "./utils/jsonHelper";
 
-import swaggerUi from 'swagger-ui-express';
-import swaggerJsdoc from 'swagger-jsdoc';
-
 const app = express();
-const v1 = express.Router(); // VERSIONING API V1
+const v1 = express.Router(); // VERSION API V1
 
 const swaggerDocs = swaggerJsdoc(swaggerOptions)
 
