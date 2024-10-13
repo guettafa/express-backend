@@ -9,6 +9,32 @@ import { isValidEmail } from "../utils/regex";
 
 const router = express();
 
+/**
+ * @swagger
+ * /v1/auth/login:
+ *   post:
+ *     description: Login to an account 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               usernameOrEmail:
+ *                 type: string
+ *                 description: user email or username 
+ *               password:
+ *                 type: string
+ *                 description: user password
+ *     responses:
+ *       200:
+ *         description: User is logged in and a JWT that will expire in 1 hour is returned 
+ *       404:
+ *         description: No user with this email or username is registered
+ *       401:
+ *         description: Entered password is wrong
+ */
 router.post("/login", async (req: Request, res: Response) => {
     const {usernameOrEmail, password} = req.body;
     const user: User = getUser(usernameOrEmail);
@@ -26,6 +52,33 @@ router.post("/login", async (req: Request, res: Response) => {
     }
 })
 
+/**
+ * @swagger
+ * /v1/auth/register:
+ *   post:
+ *     description: Register an account 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               username:
+ *                 type: string
+ *                 description: user username 
+ *               email:
+ *                 type: string
+ *                 description: user email
+ *               password:
+ *                 type: string
+ *                 description: user password
+ *     responses:
+ *       200:
+ *         description: User account has been created 
+ *       500:
+ *         description: Account couldn't be created because email is in the wrong format  
+ */
 router.post("/register", async (req: Request, res: Response) => {
     const {username, email, password} = req.body;
     if (isValidEmail(email)) {
