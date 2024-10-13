@@ -7,7 +7,7 @@ export const isValidEmail = (email: string) => {
 
 export const isValidProduct = (p: Product) => {
     const titleRgx = /^[A-Za-z\s]{3,50}$/;
-    const qantRgx  = /^(0|[1-9]\d*)$/
+    const quantRgx  = /^(0|[1-9]\d*)$/
     const priceRgx = /^\d+(\.\d+)?$/;
-    return (titleRgx.test(p.title) && qantRgx.test(p.quantity.toString()) && priceRgx.test(p.price.toString()));
+    return (titleRgx.test(p.title) && quantRgx.test(p.quantity.toString()) && priceRgx.test(p.price.toString()));
 }

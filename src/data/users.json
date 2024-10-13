@@ -9,24 +9,6 @@
         "username": "swag",
         "email": "swag@gmail.com",
         "role": 0,
-        "password": "$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry"
-    },
-    {
-        "username": "bob",
-        "email": "hello@gmail.com",
-        "role": 1,
-        "password": "$2a$15$JsFFq5XtAQEGkKLX3ZRihuZ2DFfyQmvYXm8W18NeCeU.Rqdr6LL.."
-    },
-    {
-        "username": "bob",
-        "email": "hello@gmail.com",
-        "role": 1,
-        "password": "$2a$15$iofhjyad9qqyy7fp1I.HPumm9vpOmE3iH7xdBeDLMQBMWL/Ryvz/S"
-    },
-    {
-        "username": "bob",
-        "email": "hello@gmail.com",
-        "role": 1,
-        "password": "$2a$15$kD8tKbsC0TJ/r83eRO0FgOcwAG2SKimosXSsWgApCK7N74X/LjOzm"
+        "password": "$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry" 
     }
 ]
