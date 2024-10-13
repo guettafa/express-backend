@@ -2,6 +2,7 @@ import express, {Request, Response, NextFunction} from "express";
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/products.controller";
 import { Product } from "../models/product";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
+import { logger } from "../utils/logger";
 
 const router = express.Router();
 

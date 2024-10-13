@@ -1,5 +1,3 @@
-
-import { NotFoundError } from "rxjs";
 import { Product } from "../models/product";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
 
@@ -23,18 +21,13 @@ export const addProduct = (product: Product): string => {
         description: product.description,
         price: product.price
     }); 
-
-    console.log(products);
-    
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Added Successfully";
 }
 
 export const updateProduct = (id: string): string => {
     const product = getProduct(id);
-
     // UPDATE LOGIC
-
     return "Updated Successfully";
 }
 
