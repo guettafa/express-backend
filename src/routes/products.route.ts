@@ -1,8 +1,10 @@
 import express, {Request, Response, NextFunction} from "express";
+
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/products.controller";
 import { Product } from "../models/product";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 import { logger } from "../utils/logger";
+import { isValidProduct } from "../utils/regex";
 
 const router = express.Router();
 
@@ -24,22 +26,24 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
 // POST
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
-    try {
+    if (isValidProduct(product)) {
         res.json({message: addProduct(product)});
-        logger.alert(`New product has been added - ${product.title}`);
-    } catch (error) {
-        res.status(500).json({message: error}); 
+        logger.info(`New product has been added - ${product.title}`);
+    } else {
+        res.status(500).json({message: "Product couldn't be added"}); 
+        logger.error("Product can't be added because it's in the wrong format");
     }
 });
 
 // UPDATE
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const productId = req.params.id;
-    try {
+    const product: Product = {...req.body};
+    if (isValidProduct(product)) {
         res.status(200).json({message: updateProduct(productId)});
-        logger.alert(`Product with id ${productId} has been updated`);
-    } catch (error) {
-        res.status(500).json({message: error});
+        logger.info(`Product with id ${productId} has been updated`);
+    } else {
+        res.status(500).json({message: "Product couldn't be updated"});
         logger.error(`Couldn't update product with id ${productId}`)
     }
 })
@@ -48,11 +52,11 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
 router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const productId = req.params.id;
     try {
-        logger.alert(`Product with id ${productId} has been deleted`);
         res.status(204).json({message: deleteProduct(productId)});
+        logger.info(`Product with id ${productId} has been deleted`);
     } catch (error) {
-        logger.error(`Couldn't delete product with id ${productId}`);
         res.status(404).json({message: `Product not found - ${error}`});
+        logger.error(`Couldn't delete product with id ${productId}`);
     }
 })
 

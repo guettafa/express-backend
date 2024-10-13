@@ -1,6 +1,6 @@
 import { Product } from "../models/product";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
-import { validateProduct } from "../utils/regex";
+import { isValidProduct } from "../utils/regex";
 
 const PATH_JSON_PRODUCTS = "./src/data/products.json";
 
@@ -15,11 +15,6 @@ export const getProduct = (id: string): Product => {
 }
 
 export const addProduct = (product: Product): string => {
-    if (validateProduct(product)) {
-        throw new Error(
-            "Format of the product you're trying to add is wrong"
-        );
-    }
     products.push({
         id: (products.at(-1)?.id!)+1,
         title: product.title,
