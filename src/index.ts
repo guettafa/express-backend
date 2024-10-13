@@ -22,6 +22,7 @@ const addSampleProducts = async ()  => {
                 id: json.id,
                 title: json.title,
                 description: json.description,
+                quantity: json.quantity,
                 price: json.price
             }
         ));
