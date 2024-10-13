@@ -10,7 +10,7 @@ const router = express.Router();
 
 /**
  * @swagger
- * /v1/products:
+ * /api/v1/products:
  *   get:
  *     description: Retrieve all products from products.json. A token is required. 
  *     responses:
@@ -25,7 +25,7 @@ router.get("/", checkAccess, async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /v1/products/{id}:
+ * /api/v1/products/{id}:
  *   get:
  *     description: Retrieve a specific product 
  *     parameters:
@@ -52,7 +52,7 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /v1/products:
+ * /api/v1/products:
  *   post:
  *     description: Add a new product. Only authenticated users with Gestionnaire role have access to this 
  *     requestBody:
@@ -100,7 +100,7 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
 
 /**
  * @swagger
- * /v1/products/{id}:
+ * /api/v1/products/{id}:
  *   put:
  *     description: Update a product. Only authenticated users with Gestionnaire role have access to this 
  *     requestBody:
@@ -154,7 +154,7 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
 
 /**
  * @swagger
- * /v1/products/{id}:
+ * /api/v1/products/{id}:
  *   delete:
  *     description: Delete a product. Only authenticated users with Gestionnaire role have access to this 
  *     parameters:

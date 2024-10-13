@@ -45,7 +45,7 @@ v1.use("/products", productsRoutes, )
 v1.use("/users", usersRoutes)
 v1.use("/auth", authRoutes);
 v1.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-app.use("/v1", v1);
+app.use("/api/v1", v1);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");

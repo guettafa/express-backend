@@ -11,7 +11,7 @@ const router = express();
 
 /**
  * @swagger
- * /v1/auth/login:
+ * /api/v1/auth/login:
  *   post:
  *     description: Login to an account 
  *     requestBody:
@@ -54,7 +54,7 @@ router.post("/login", async (req: Request, res: Response) => {
 
 /**
  * @swagger
- * /v1/auth/register:
+ * /api/v1/auth/register:
  *   post:
  *     description: Register an account 
  *     requestBody:

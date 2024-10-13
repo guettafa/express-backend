@@ -43,8 +43,8 @@ Execute command `npm start` on project root to start the server
 npm start 
 ```
 
-# Look by yourself
-You can check if everything worked as you planned by going at `https://localhost:3000`
+# Look by yourself !
+You can check if everything worked as planned by going at `https://localhost:3000`
 
 ## Features
 
