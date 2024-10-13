@@ -1,6 +1,5 @@
 import { Role, User } from "../models/user";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
-import bcrypt from "bcryptjs";
 
 const PATH_JSON_USERS = "./src/data/users.json";
 

@@ -44,6 +44,7 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
 router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     try {
         res.status(204).json({message: deleteProduct(req.params.id)});
+        logger.alert(`Product with id ${req.params.id} has been deleted`);
     } catch (error) {
         res.status(404).json({message: `Product not found - ${error}`});
     }
