@@ -14,21 +14,21 @@ export const getProduct = (id: string): Product => {
 }
 
 export const addProduct = (product: Product): string => {
-    products.push({
-        id: (products.at(-1)?.id!)+1,
-        title: product.title,
-        description: product.description,
-        quantity: product.quantity,
-        category: product.category,
-        price: product.price
-    }); 
+    product.id = products.at(-1)?.id!+1;
+    const newProduct = {...product};
+    
+    products.push({...newProduct}); 
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Added Sucessfully";
 }
 
 export const updateProduct = (id: string, p: Product): string => {
-    const product = getProduct(id);
-    //  TODO 
+    for (let prod of products) {
+        if (prod.id === Number(id)) {
+            prod = {...p};
+        }
+    }
+    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Updated Sucessfully";
 }
 

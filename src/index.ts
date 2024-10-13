@@ -41,6 +41,7 @@ const addSampleProducts = async ()  => {
 
 app.use(express.json()),
 
+// VERSIONING
 v1.use("/products", productsRoutes, )
 v1.use("/users", usersRoutes)
 v1.use("/auth", authRoutes);
@@ -51,6 +52,7 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
+// HTTPS
 https
     .createServer(
         {
