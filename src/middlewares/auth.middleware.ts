@@ -8,7 +8,7 @@ export const checkAccess = (req: any, res: Response, next: NextFunction) => {
     const token: string = req.headers['authorization'];
     // No token found
     if (!token) {
-        res.status(403).json({ message: "Token is missing" });
+        res.status(401).json({ message: "Token is missing" });
     } else {
         // Token found
 
