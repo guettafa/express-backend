@@ -5,7 +5,9 @@ import usersRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
+
 import https from "https";
+import fs from "fs";
 
 import { envConfig, swaggerOptions } from "./config/config";
 import { Product } from "./models/product";
@@ -49,8 +51,15 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
-app.listen(PORT, () => {
-    addSampleProducts();
-    console.log(`Listening on port ${PORT}`);
-});
+https
+    .createServer(
+        {
+            key: fs.readFileSync("./src/certs/server.key"),
+            cert: fs.readFileSync("./src/certs/server.cert"),
+        }, app
+    )
+    .listen(PORT, () => {
+        addSampleProducts();
+        console.log(`Listening on port ${PORT}`);
+    });
 
