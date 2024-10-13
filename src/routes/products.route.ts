@@ -8,12 +8,19 @@ import { isValidProduct } from "../utils/regex";
 
 const router = express.Router();
 
-// GET ALL
+/**
+ * @swagger
+ * /v1/products:
+ *   get:
+ *     description: Retrieve all products from producst.json.
+ *     responses:
+ *       200:
+ *         description: A list of products.
+ */
 router.get("/", checkAccess, async (req: Request, res: Response) => {
     res.json(getProducts());
 });
 
-// GET BY ID
 router.get("/:id", checkAccess, async (req: Request, res: Response) => {
     const product = getProduct(req.params.id);
     if (!product) {
@@ -23,7 +30,6 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
     }
 })
 
-// POST
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
     if (isValidProduct(product)) {
@@ -35,7 +41,6 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
     }
 });
 
-// UPDATE
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const productId = req.params.id;
     const product: Product = {...req.body};
@@ -48,7 +53,6 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
     }
 })
 
-// DELETE
 router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const productId = req.params.id;
     try {
