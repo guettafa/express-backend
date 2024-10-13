@@ -1,5 +1,5 @@
-import jwt from "jsonwebtoken";
 import express, { Response, NextFunction } from "express";
+import jwt from "jsonwebtoken";
 import { config } from "../config/config";
 import { Role } from "../models/user";
 
@@ -27,6 +27,7 @@ export const checkAccess = (req: any, res: Response, next: NextFunction) => {
 export const isGestionnaire = (req: any, res: Response, next: NextFunction) => {
     if (req.user.role === Role.GESTIONNAIRE) {
         next();
-    }
-    res.status(403).json({message: "You don't have access to this ressource"});
+    } else {
+        res.status(403).json({message: "You don't have access to this ressource"});
+    } 
 }
