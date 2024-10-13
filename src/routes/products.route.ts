@@ -25,8 +25,8 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
     try {
-        logger.alert(`New product has been added - ${product.title}`);
         res.json({message: addProduct(product)});
+        logger.alert(`New product has been added - ${product.title}`);
     } catch (error) {
         res.status(500).json({message: error}); 
     }
@@ -36,11 +36,11 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const productId = req.params.id;
     try {
-        logger.alert(`Product with id ${productId} has been updated`);
         res.status(200).json({message: updateProduct(productId)});
+        logger.alert(`Product with id ${productId} has been updated`);
     } catch (error) {
-        logger.error(`Couldn't update product with id ${productId}`)
         res.status(500).json({message: error});
+        logger.error(`Couldn't update product with id ${productId}`)
     }
 })
 

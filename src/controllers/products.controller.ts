@@ -14,7 +14,6 @@ export const getProduct = (id: string): Product => {
 }
 
 export const addProduct = (product: Product): string => {
-    // REGEX TO CHECK
     products.push({
         id: (products.at(-1)?.id!)+1,
         title: product.title,
