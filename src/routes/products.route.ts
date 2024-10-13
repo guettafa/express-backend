@@ -54,7 +54,29 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
  * @swagger
  * /v1/products:
  *   post:
- *     description: Add a new product. Only authenticated users with Gestionnaire role can do that 
+ *     description: Add a new product. Only authenticated users with Gestionnaire role have access to this 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The title of the product 
+ *               description:
+ *                 type: string
+ *                 description: The description of the product
+ *               category:
+ *                 type: string
+ *                 description: The category of the product
+ *               price:
+ *                 type: number
+ *                 description: The price of the product
+ *               quantity:
+ *                 type: number
+ *                 description: The quantity of the product
  *     responses:
  *       201:
  *         description: The product has been added
@@ -78,9 +100,31 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
 
 /**
  * @swagger
- * /v1/products/:id:
+ * /v1/products/{id}:
  *   put:
- *     description: Update a product. Only authenticated users with Gestionnaire role can do that 
+ *     description: Update a product. Only authenticated users with Gestionnaire role have access to this 
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 description: The new title of the product
+ *               description:
+ *                 type: string
+ *                 description: The new description of the product 
+ *               category:
+ *                 type: string
+ *                 description: The new category of the product
+ *               price:
+ *                 type: number
+ *                 description: The new price of the product
+ *               quantity:
+ *                 type: number
+ *                 description: The new quantity of the product
  *     parameters:
  *       - name: id
  *         in: path
@@ -110,9 +154,9 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
 
 /**
  * @swagger
- * /v1/products/:id:
+ * /v1/products/{id}:
  *   delete:
- *     description: Delete a product. Only authenticated users with Gestionnaire role can do that 
+ *     description: Delete a product. Only authenticated users with Gestionnaire role have access to this 
  *     parameters:
  *       - name: id
  *         in: path
