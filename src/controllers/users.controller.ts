@@ -16,8 +16,8 @@ export const getUser = (usernameOrEmail: string): User => {
 
 export const addUser = async (username: string, email: string, hashedPassword: string) => {
     if (validateEmail(email)) {
-        throw new Error("Email is in a wrong format");
-    }
+        throw new Error("Email is in the wrong format");
+    } 
     users.push({
         username: username,
         email: email,
