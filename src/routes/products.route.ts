@@ -27,10 +27,10 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
     if (isValidProduct(product)) {
-        res.json({message: addProduct(product)});
+        res.status(201).json({message: addProduct(product)});
         logger.info(`New product has been added - ${product.title}`);
     } else {
-        res.status(500).json({message: "Product couldn't be added"}); 
+        res.status(400).json({message: "Product couldn't be added"}); 
         logger.error("Product can't be added because it's in the wrong format");
     }
 });

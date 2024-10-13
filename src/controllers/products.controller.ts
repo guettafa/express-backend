@@ -19,6 +19,7 @@ export const addProduct = (product: Product): string => {
         title: product.title,
         description: product.description,
         quantity: product.quantity,
+        category: product.category,
         price: product.price
     }); 
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);

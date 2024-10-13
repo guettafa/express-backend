@@ -23,6 +23,7 @@ const addSampleProducts = async ()  => {
                 title: json.title,
                 description: json.description,
                 quantity: Math.round(Math.random()*50),
+                category: json.category,
                 price: json.price
             }
         ));
