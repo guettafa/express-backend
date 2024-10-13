@@ -1,6 +1,5 @@
 import express, {NextFunction, Request, Response} from "express";
 
-import { User } from "../models/user";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 import { getUser, getUsers } from "../controllers/users.controller";
 

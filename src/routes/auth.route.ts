@@ -1,13 +1,12 @@
 import express, {Request, Response} from "express";
 import bcrypt from "bcryptjs"; 
-import jwt from "jsonwebtoken";
 
-import { config } from "../config/config";
 import { User } from "../models/user";
 import { addUser, getUser } from "../controllers/users.controller";
+import { logger } from "../utils/logger";
+import { signToken } from "../utils/jwt";
 
 const router = express();
-const SECRET_KEY = config.jwt_secret;
 
 router.post("/login", async (req: Request, res: Response) => {
     const {usernameOrEmail, password} = req.body;
@@ -15,14 +14,10 @@ router.post("/login", async (req: Request, res: Response) => {
     
     if (!user) {
         res.status(404).json("No user with those informations can be found")
+        logger.error("404 - user not found - " + usernameOrEmail);
     } else {
         if (await bcrypt.compare(password, user.password)) {
-            const token = jwt.sign(
-                {username: user.username, role: user.role}, // Infos in JWT 
-                SECRET_KEY as string, 
-                { expiresIn: "1h"}
-            );
-            res.json(`Bearer ${token}`);
+            res.json({token: signToken(user.username, user.role)});
         } else {
             res.status(400).json("Wrong Password") 
         }

@@ -20,8 +20,6 @@ export const logger = winston.createLogger({
     ],
 });
 
-logger.error("Some errors")
-
 /*  WINSTON LOG LEVELS
 {
   error: 0,
