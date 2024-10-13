@@ -34,9 +34,9 @@ export const updateProduct = (id: string): string => {
 export const deleteProduct = (id: string): string => {
     const productId = products.indexOf(getProduct(id));
     if (productId === -1) {
-        throw new Error(`There's no product with the id ${id}`);
+        throw new Error(`There's no product with id ${id}`);
     }
-    products.splice(productId,1); // delete product
+    products.splice(productId, 1); // delete product
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Deleted Successfully";
 }

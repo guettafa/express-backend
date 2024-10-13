@@ -1,1 +1,44 @@
-[{"username":"coco","email":"coco@gmail.com","role":1,"password":"$2a$15$NSIfhPtFozIoHJ9wAb9tQeyZ3bT5gl9WI5Ey6/b3K58SuYjBfKV2O"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$c4wgi7DQddAP7PIQR2iwL.gZFATL1JTqioPUmOE9Xf0eDQzrIlt4C"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$K2EiGn7al3gTfGD262gB/uUdd5j.vBOLnql/Hc91qlfz6rlaD2ZoG"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$cxtIEmXLEEi7MkbQYigBWOXlUpdxy.pp7dgORIvDVQ8okw0N73UNG"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$FxvojOFE/y6JXPC9EgLllet5WePW6HTcoMhgt4A4cuxOOPlTERKWe"},{"username":"swag","email":"swag@gmail.com","role":1,"password":"$2a$15$b03/TW3lLzw3r9sPEc/7KO7yfd9eSZhc9/dXXA1KmwaCObZYfbH0C"}]
+[
+    {
+        "username": "coco",
+        "email": "coco@gmail.com",
+        "role": 1,
+        "password": "$2a$15$NSIfhPtFozIoHJ9wAb9tQeyZ3bT5gl9WI5Ey6/b3K58SuYjBfKV2O"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$c4wgi7DQddAP7PIQR2iwL.gZFATL1JTqioPUmOE9Xf0eDQzrIlt4C"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$K2EiGn7al3gTfGD262gB/uUdd5j.vBOLnql/Hc91qlfz6rlaD2ZoG"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$cxtIEmXLEEi7MkbQYigBWOXlUpdxy.pp7dgORIvDVQ8okw0N73UNG"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$FxvojOFE/y6JXPC9EgLllet5WePW6HTcoMhgt4A4cuxOOPlTERKWe"
+    },
+    {
+        "username": "swag",
+        "email": "swag@gmail.com",
+        "role": 1,
+        "password": "$2a$15$b03/TW3lLzw3r9sPEc/7KO7yfd9eSZhc9/dXXA1KmwaCObZYfbH0C"
+    }
+]
