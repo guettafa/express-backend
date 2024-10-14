@@ -43,10 +43,10 @@ router.get("/", checkAccess, async (req: Request, res: Response) => {
  */
 router.get("/:id", checkAccess, async (req: Request, res: Response) => {
     const product = getProduct(req.params.id);
-    if (!product) {
-        res.status(404).json({message: "Product not found"});
-    } else {
+    if (product) {
         res.json(product);
+    } else {
+        res.status(404).json({message: "Product not found"});
     }
 })
 
