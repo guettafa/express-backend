@@ -89,7 +89,7 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
  */
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
-    if (Object.keys(product).length === 5 && isValidProduct(product)) {
+    if (isValidProduct(product)) {
         res.status(201).json({message: addProduct(product)});
         logger.info(`Product has been added - ${product.title}`);
     } else {
@@ -137,19 +137,25 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
  *         description: Not even authenticated
  *       403:
  *         description: Authenticated user is not a gestionnaire
+ *       404:
+ *         description: Product with specified id can't be found
  *       500:
  *         description: The product couldn't be added because product informations are in the wrong format
  */
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const toUpdatePId = req.params.id;
     const product: Product = {...req.body};
+    const toUpdateP = getProduct(req.params.id);
 
-    if (Object.keys(product).length === 5 && isValidProduct(product)) {
-        res.status(200).json({message: updateProduct(toUpdatePId, product)});
-        logger.info(`Product has been updated`);
+    if (toUpdateP) {
+        if (isValidProduct(product)) {
+            res.status(200).json({message: updateProduct(toUpdateP, product)});
+            logger.info(`Product has been updated`);
+        } else {
+            res.status(400).json({message: "Product couldn't be updated - Wrong format"});
+            logger.error(`Couldn't update product with id ${req.params.id}`)
+        }
     } else {
-        res.status(400).json({message: "Product couldn't be updated - Wrong format"});
-        logger.error(`Couldn't update product with id ${toUpdatePId}`)
+        res.status(404).json({message: `Product with id ${req.params.id} can't be found`})
     }
 })
 

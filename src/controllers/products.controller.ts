@@ -15,19 +15,16 @@ export const getProduct = (id: string): Product => {
 
 export const addProduct = (product: Product): string => {
     product.id = products.at(-1)?.id!+1;
-    const newProduct = {...product};
+    const newProduct: Product = {...product};
     
     products.push({...newProduct}); 
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Added Sucessfully";
 }
 
-export const updateProduct = (id: string, p: Product): string => {
-    for (let prod of products) {
-        if (prod.id === Number(id)) {
-            prod = {...p};
-        }
-    }
+export const updateProduct = (oldProduct: Product, newProduct: Product): string => {
+    newProduct.id = oldProduct.id;
+    products[products.indexOf(oldProduct)] = {...newProduct};
     saveJSON<Product>(products, PATH_JSON_PRODUCTS);
     return "Updated Sucessfully";
 }

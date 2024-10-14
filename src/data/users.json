@@ -16,5 +16,11 @@
         "email": "coco@gmail.com",
         "role": 1,
         "password": "$2a$15$mPd8f6vLL2QMsfuSEO0roOnYt1lka2c.cvzlpeeqs8skFhkaRWkgi"
+    },
+    {
+        "username": "bob",
+        "email": "bob@gmail.com",
+        "role": 1,
+        "password": "$2a$15$iHDfBo1o1dQMa1h4jOlseOFxzomuDIxNGOoozoeh2XQSuPo28cXmq"
     }
 ]

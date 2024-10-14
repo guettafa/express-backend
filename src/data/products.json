@@ -1,26 +1,10 @@
 [
     {
-        "id": 1,
-        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        "quantity": 19,
-        "category": "men's clothing",
-        "price": 109.95
-    },
-    {
-        "title": "Fjallraven Laptops",
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        "quantity": 39,
+        "title": "dwadwad",
+        "description": "Some produ",
+        "quantity": 5,
         "category": "men's clothing",
         "price": 109.95,
-        "id": 2
-    },
-    {
-        "title": "Fjallrdwadaaven Laptops",
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        "quantity": 39,
-        "category": "men's clothing",
-        "price": 109.95,
-        "id": 3
+        "id": 1
     }
 ]
