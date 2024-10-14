@@ -39,9 +39,7 @@ router.post("/login", async (req: Request, res: Response) => {
     const {usernameOrEmail, password} = req.body;
     const user: User = getUser(usernameOrEmail);
     
-    if (!user) {
-        res.status(404).json("No user with those informations can be found");
-    } else {
+    if (user) {
         if (await bcrypt.compare(password, user.password)) {
             res.json({token: signToken(user.username, user.role)});
             logger.info(`User ( ${user.username} - ${user.email} ) just logged in`);
@@ -49,6 +47,8 @@ router.post("/login", async (req: Request, res: Response) => {
             res.status(401).json("Wrong Password") 
             logger.error(`Failed attempt to login to account associated to ${user.email}`)
         }
+    } else {
+        res.status(404).json("No user with those informations can be found");
     }
 })
 
