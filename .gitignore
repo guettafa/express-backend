@@ -7,6 +7,9 @@ yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
 
+*.cert
+*.key
+
 package-lock.json
 /node-modules
 
