@@ -32,8 +32,8 @@ app.get("/", (req: Request, res: Response) => {
 https
     .createServer(
         {
-            key: fs.readFileSync("./src/certs/server.key"),
-            cert: fs.readFileSync("./src/certs/server.cert"),
+            key: fs.readFileSync("./certs/server.key"),
+            cert: fs.readFileSync("./certs/server.cert"),
         }, app
     )
     .listen(PORT, () => {

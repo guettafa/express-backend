@@ -24,7 +24,7 @@ npm install
 3. Generate Cert + Key for HTTPS
 ```sh
 # Execute this command in project root
-openssl req -nodes -new -x509 -keyout src/certs/server.key -out src/certs/server.cert
+openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert
 ```
 
 ## Create .env file
