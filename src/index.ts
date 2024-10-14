@@ -1,43 +1,19 @@
 import express, { Request, Response } from "express";
-
 import productsRoutes from "./routes/products.route";
 import usersRoutes from "./routes/users.route";
 import authRoutes from "./routes/auth.route";
 import swaggerUi from 'swagger-ui-express';
 import swaggerJsdoc from 'swagger-jsdoc';
-
 import https from "https";
 import fs from "fs";
-
 import { envConfig, swaggerOptions } from "./config/config";
-import { Product } from "./models/product";
-import { saveJSON } from "./utils/jsonHelper";
+import { addSampleProducts } from "./utils/jsonHelper";
+
+const PORT = envConfig.port;
 
 const app = express();
 const v1 = express.Router(); // VERSION API V1
-
 const swaggerDocs = swaggerJsdoc(swaggerOptions)
-
-const PORT = envConfig.port;
-const PATH_JSON_PRODUCTS = "./src/data/products.json";
-
-// To add products at the beginning
-const addSampleProducts = async ()  => {
-    let products: Product[] = [];
-    await fetch('https://fakestoreapi.com/products/1')
-        .then(res=>res.json())
-        .then(json=>products.push(
-            {
-                id: json.id,
-                title: json.title,
-                description: json.description,
-                quantity: Math.round(Math.random()*50),
-                category: json.category,
-                price: json.price
-            }
-        ));
-    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
-}
 
 app.use(express.json()),
 
