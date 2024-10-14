@@ -16,10 +16,11 @@ export const checkAccess = (req: any, res: Response, next: NextFunction) => {
         jwt.verify(token?.split(' ')[1], envConfig.jwt_secret as string, (error: any, decoded: any) => {
             if (error) {
                 res.status(401).json({message: "Invalid Token"});
+            } else { 
+                // Retrieve token information
+                req.user = decoded
+                next(); // pass to the next middleware
             }
-            // Retrieve token information
-            req.user = decoded
-            next(); // pass to the next middleware
         })
     }
 }

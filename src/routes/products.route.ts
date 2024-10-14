@@ -89,12 +89,12 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
  */
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: Product = {...req.body};
-    if (isValidProduct(product)) {
+    if (Object.keys(product).length === 5 && isValidProduct(product)) {
         res.status(201).json({message: addProduct(product)});
-        logger.info(`New product has been added - ${product.title}`);
+        logger.info(`Product has been added - ${product.title}`);
     } else {
-        res.status(400).json({message: "Product couldn't be added"}); 
-        logger.error("Product can't be added because it's in the wrong format");
+        res.status(400).json({message: "Product couldn't be added - Wrong format"}); 
+        logger.error(`Product can't be added - Wrong format : ${product}`);
     }
 });
 
@@ -143,11 +143,12 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const toUpdatePId = req.params.id;
     const product: Product = {...req.body};
-    if (isValidProduct(product)) {
+
+    if (Object.keys(product).length === 5 && isValidProduct(product)) {
         res.status(200).json({message: updateProduct(toUpdatePId, product)});
-        logger.info(`Product with id ${toUpdatePId} has been updated`);
+        logger.info(`Product has been updated`);
     } else {
-        res.status(500).json({message: "Product couldn't be updated"});
+        res.status(400).json({message: "Product couldn't be updated - Wrong format"});
         logger.error(`Couldn't update product with id ${toUpdatePId}`)
     }
 })
