@@ -29,21 +29,19 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 // HTTP / HTTPS
-const https_server = https.createServer(
-    {
-        key: fs.readFileSync("./certs/server.key"), 
-        cert: fs.readFileSync("./certs/server.cert")
-    }
-);
+// https
+//     .createServer(
+//         {
+//             key: fs.readFileSync("./certs/server.key"),
+//             cert: fs.readFileSync("./certs/server.cert"),
+//         }, app
+//     )
+//     .listen(PORT, () => {
+//         addSampleProducts();
+//         console.log(`Listening on port ${PORT}`);
+//     });
 
-if (https_server) {
-    https_server.listen(PORT, () => {
-        addSampleProducts();
-        console.log(`HTTPS - Listening on port ${PORT}`);
-    });
-} else {
-    app.listen(PORT, () => {
-        addSampleProducts();
-        console.log(`HTTP - Listening on port ${PORT}`);
-    })
-}
+app.listen(PORT, () => {
+    addSampleProducts();
+    console.log(`Listening on port ${PORT}`);
+})
