@@ -1,14 +1,1 @@
-[
-    {
-        "username": "coco",
-        "email": "coco@gmail.com",
-        "role": 1,
-        "password": "$2a$15$NSIfhPtFozIoHJ9wAb9tQeyZ3bT5gl9WI5Ey6/b3K58SuYjBfKV2O"
-    },
-    {
-        "username": "swag",
-        "email": "swag@gmail.com",
-        "role": 0,
-        "password": "$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry"
-    }
-]
+[{"username":"coco","email":"coco@gmail.com","role":1,"password":"$2a$15$NSIfhPtFozIoHJ9wAb9tQeyZ3bT5gl9WI5Ey6/b3K58SuYjBfKV2O"},{"username":"swag","email":"swag@gmail.com","role":0,"password":"$2a$15$JKdLEaGenew1LteqgwpjbeAiExBuRztvc02NsdGdaefViWNQhddry"},{"username":"bob","email":"bob@gmail.com","role":1,"password":"$2a$15$cNwBnQ6aL8MghDkJ5eDUkueAcF7MCf9oN4yXm8ySM/A1F42OT9ame"}]
