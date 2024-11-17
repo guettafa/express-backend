@@ -1,40 +1,26 @@
-import { Product } from "../models/product";
-import { readJSON, saveJSON } from "../utils/jsonHelper";
+import Product from "../models/products";
+import { Products } from "../interfaces/product";
 
-const PATH_JSON_PRODUCTS = "./src/v2/data/products.json";
-
-let products: Product[] = readJSON<Product>(PATH_JSON_PRODUCTS);
-
-export const getProducts = (): Product[] => {
-    return products;
+export const getProducts = async () => {
+  return await Product.find();
 }
 
-export const getProduct = (id: string): Product => {
-    return products.find(p => p.id.toString() === id)!; 
+export const getProduct = async (id: string) => {
+  return await Product.findById(id);
 }
 
-export const addProduct = (product: Product): string => {
-    product.id = products.at(-1)?.id!+1;
-    const newProduct: Product = {...product};
-    
-    products.push({...newProduct}); 
-    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
+export const addProduct = (product: any): string => {
+    const newProduct = {...product};
+    Product.create(newProduct);
     return "Added Sucessfully";
 }
 
-export const updateProduct = (oldProduct: Product, newProduct: Product): string => {
-    newProduct.id = oldProduct.id;
-    products[products.indexOf(oldProduct)] = {...newProduct};
-    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
+export const updateProduct = async (oldProduct: any, newProduct: any) => {
+    await Product.findByIdAndUpdate(oldProduct.id, newProduct);
     return "Updated Sucessfully";
 }
 
-export const deleteProduct = (id: string): string => {
-    const productId = products.indexOf(getProduct(id));
-    if (productId === -1) {
-        throw new Error(`There's no product with id ${id}`);
-    }
-    products.splice(productId, 1); // delete product
-    saveJSON<Product>(products, PATH_JSON_PRODUCTS);
-    return `Product with id ${productId} has been deleted with sucess`;
+export const deleteProduct = async (id: string) => {
+    await Product.findByIdAndDelete(id);
+    return `Product with id ${id} has been deleted with success`;
 }

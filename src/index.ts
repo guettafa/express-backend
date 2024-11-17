@@ -17,7 +17,7 @@ import fs from "fs";
 import { envConfig, swaggerOptions } from "./config/config";
 
 import { addSampleProducts as addSampleProductsV1 } from "./v1/utils/jsonHelper";
-import { addSampleProducts as addSampleProductsV2 } from "./v2/utils/jsonHelper"
+import mongoose from "mongoose";
 
 const PORT = envConfig.port;
 
@@ -27,6 +27,19 @@ const v2 = express.Router(); // VERSION API V1
 const swaggerDocs = swaggerJsdoc(swaggerOptions)
 
 app.use(express.json()),
+
+// DB
+mongoose.connect('mongodb+srv://irontitou5:voltron123@cluster0.4o8io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+const db = mongoose.connection;
+
+db.on('error', 
+  console.error.bind(console, 'Erreur de connexion à MongoDB')
+);
+
+db.once('open', () => {
+  console.log('Connected successfully');
+});
+
 
 // VERSIONING
 v1.use("/products", productsRoutesV1, )
@@ -55,7 +68,6 @@ https
     )
     .listen(PORT, () => {
         addSampleProductsV1();
-        addSampleProductsV2();
         console.log(`Listening on port ${PORT}`);
     });
 

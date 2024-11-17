@@ -16,5 +16,5 @@ export const swaggerOptions = {
         description: 'A simple API to manage products',
       },
     },
-    apis: ['./src/routes/*.route.ts'],
+    apis: ['./src/v2/routes/*.route.ts'],
 };

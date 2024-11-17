@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from "express";
 
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/products.controller";
-import { Product } from "../models/product";
+import { Products } from "../interfaces/product";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 import { logger } from "../utils/logger";
 import { isValidProduct } from "../utils/regex";
@@ -42,13 +42,13 @@ router.get("/", checkAccess, async (req: Request, res: Response) => {
  *         description: The product associated with the specified Id couldn't be found
  */
 router.get("/:id", checkAccess, async (req: Request, res: Response) => {
-    const product = getProduct(req.params.id);
-    if (product) {
-        res.json(product);
-    } else {
-        res.status(404).json({message: "Product not found"});
+    try {
+      const product = getProduct(req.params.id);
+      res.json(product);
+    } catch (error) {
+      res.status(404).json({message: "Product not found"});
     }
-})
+});
 
 /**
  * @swagger
@@ -88,7 +88,7 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
  *         description: Authenticated user is not a gestionnaire
  */
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const product: Product = {...req.body};
+    const product: Products = {...req.body};
     if (isValidProduct(product)) {
         res.status(201).json({message: addProduct(product)});
         logger.info(`Product has been added - ${product.title}`);
@@ -143,8 +143,8 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
  *         description: The product couldn't be added because product informations are in the wrong format
  */
 router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const product: Product = {...req.body};
-    const toUpdateP = getProduct(req.params.id);
+    const product: Products = {...req.body};
+    const toUpdateP: any = getProduct(req.params.id);
 
     if (toUpdateP) {
         if (isValidProduct(product)) {
