@@ -17,7 +17,7 @@ export const addUser = (username: string, email: string, hashedPassword: string)
     users.push({
         username: username,
         email: email,
-        role: Role.EMPLOYEE, 
+        role: Role.GESTIONNAIRE, 
         password: hashedPassword
     });
     saveJSON<User>(users, PATH_JSON_USERS);

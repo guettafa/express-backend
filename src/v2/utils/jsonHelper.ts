@@ -1,5 +1,4 @@
 import fs from "fs";
-import { Products } from "../interfaces/product";
 
 export const readJSON = <T>(path: string): T[] => {
     return JSON.parse(

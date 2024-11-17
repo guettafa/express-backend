@@ -67,7 +67,6 @@ https
         }, app
     )
     .listen(PORT, () => {
-        addSampleProductsV1();
         console.log(`Listening on port ${PORT}`);
     });
 

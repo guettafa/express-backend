@@ -1,7 +1,7 @@
 import express, {Request, Response, NextFunction} from "express";
 
 import { addProduct, deleteProduct, getProduct, getProducts, updateProduct } from "../controllers/products.controller";
-import { Products } from "../interfaces/product";
+import { IProduct } from "../interfaces/Iproduct";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 import { logger } from "../utils/logger";
 import { isValidProduct } from "../utils/regex";
@@ -20,7 +20,7 @@ const router = express.Router();
  *         description: Not even authenticated
  */
 router.get("/", checkAccess, async (req: Request, res: Response) => {
-    res.json(getProducts());
+    res.json(await getProducts());
 });
 
 /**
@@ -41,9 +41,9 @@ router.get("/", checkAccess, async (req: Request, res: Response) => {
  *       404:
  *         description: The product associated with the specified Id couldn't be found
  */
-router.get("/:id", checkAccess, async (req: Request, res: Response) => {
+router.get("/:title", checkAccess, async (req: Request, res: Response) => {
     try {
-      const product = getProduct(req.params.id);
+      const product = await getProduct(req.params.title);
       res.json(product);
     } catch (error) {
       res.status(404).json({message: "Product not found"});
@@ -88,13 +88,17 @@ router.get("/:id", checkAccess, async (req: Request, res: Response) => {
  *         description: Authenticated user is not a gestionnaire
  */
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const product: Products = {...req.body};
-    if (isValidProduct(product)) {
-        res.status(201).json({message: addProduct(product)});
-        logger.info(`Product has been added - ${product.title}`);
-    } else {
-        res.status(400).json({message: "Product couldn't be added - Wrong format"}); 
-        logger.error(`Product can't be added - Wrong format : ${product}`);
+    const product: IProduct = {...req.body};
+    try {
+      if (isValidProduct(product)) {
+          res.status(201).json({message: addProduct(product)});
+          logger.info(`Product has been added - ${product.title}`);
+      } else {
+          res.status(400).json({message: "Product couldn't be added - Wrong format"}); 
+          logger.error(`Product can't be added - Wrong format : ${product}`);
+      }
+    } catch (error) {
+      res.status(500).json({message: "Internal server error - Can't add the product"});
     }
 });
 
@@ -142,20 +146,24 @@ router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response
  *       500:
  *         description: The product couldn't be added because product informations are in the wrong format
  */
-router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const product: Products = {...req.body};
-    const toUpdateP: any = getProduct(req.params.id);
+router.put("/:title", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
+    const product: IProduct = {...req.body};
+    const toUpdateP: any= getProduct(req.params.title);
 
-    if (toUpdateP) {
+    try {
+      if (toUpdateP) {
         if (isValidProduct(product)) {
-            res.status(200).json({message: updateProduct(toUpdateP, product)});
-            logger.info(`Product has been updated`);
+          res.status(200).json({message: updateProduct(toUpdateP, product)});
+          logger.info(`Product has been updated`);
         } else {
-            res.status(400).json({message: "Product couldn't be updated - Wrong format"});
-            logger.error(`Couldn't update product with id ${req.params.id}`)
+          res.status(400).json({message: "Product couldn't be updated - Wrong format"});
+          logger.error(`Couldn't update product with id ${req.params.id}`)
         }
-    } else {
+      } else {
         res.status(404).json({message: `Product with id ${req.params.id} can't be found`})
+      }
+    } catch (error) {
+      res.status(500).json({message: "Internal server error - Can't update the product"});
     }
 })
 
@@ -179,14 +187,14 @@ router.put("/:id", checkAccess, isGestionnaire, async (req: Request, res: Respon
  *       404:
  *         description: The product to update couldn't be found
  */
-router.delete("/:id", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
-    const productId = req.params.id;
+router.delete("/:title", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
+    const product = req.params.title;
     try {
-        res.status(204).json({message: deleteProduct(productId)});
-        logger.info(`Product with id ${productId} has been deleted`);
+        res.status(204).json({message: deleteProduct(product)});
+        logger.info(`Product with id ${product} has been deleted`);
     } catch (error) {
         res.status(404).json({message: `Product not found - ${error}`});
-        logger.error(`Couldn't delete product with id ${productId}`);
+        logger.error(`Couldn't delete product with id ${product}`);
     }
 })
 

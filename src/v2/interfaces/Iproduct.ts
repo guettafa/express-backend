@@ -1,4 +1,4 @@
-export interface Products {
+export interface IProduct {
   title: string;
   description: string;
   quantity: number;

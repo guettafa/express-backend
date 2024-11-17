@@ -1,26 +1,28 @@
-import Product from "../models/products";
-import { Products } from "../interfaces/product";
+import Products from "../models/product";
+import { IProduct } from "../interfaces/Iproduct";
 
 export const getProducts = async () => {
-  return await Product.find();
+  const products = await Products.find();
+  return products;
 }
 
-export const getProduct = async (id: string) => {
-  return await Product.findById(id);
+export const getProduct = async (title: string) => {
+  return Products.findOne({ title: title}); // find by title
 }
 
-export const addProduct = (product: any): string => {
-    const newProduct = {...product};
-    Product.create(newProduct);
+export const addProduct = async (product: IProduct)=> {
+    const newProduct = new Products(product);
+    newProduct.save();
+
     return "Added Sucessfully";
 }
 
-export const updateProduct = async (oldProduct: any, newProduct: any) => {
-    await Product.findByIdAndUpdate(oldProduct.id, newProduct);
+export const updateProduct = async (oldProduct: IProduct, newProduct: IProduct) => {
+    await Products.updateOne({ title: oldProduct})
     return "Updated Sucessfully";
 }
 
-export const deleteProduct = async (id: string) => {
-    await Product.findByIdAndDelete(id);
-    return `Product with id ${id} has been deleted with success`;
+export const deleteProduct = async (title: string) => {
+    await Products.findOneAndDelete({ title: title});
+    return `Product ${title} has been deleted with success`;
 }
