@@ -17,6 +17,7 @@ export const addProduct = async (product: IProduct)=> {
     return "Added Sucessfully";
 }
 
+// TO FIX
 export const updateProduct = async (oldProduct: IProduct, newProduct: IProduct) => {
     await Products.updateOne({ title: oldProduct})
     return "Updated Sucessfully";

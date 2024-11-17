@@ -20,16 +20,17 @@ import { addSampleProducts as addSampleProductsV1 } from "./v1/utils/jsonHelper"
 import mongoose from "mongoose";
 
 const PORT = envConfig.port;
+const DB_CONNECTION = envConfig.db_connection!;
 
 const app = express();
 const v1 = express.Router(); // VERSION API V1
-const v2 = express.Router(); // VERSION API V1
+const v2 = express.Router(); // VERSION API V2
 const swaggerDocs = swaggerJsdoc(swaggerOptions)
 
 app.use(express.json()),
 
 // DB
-mongoose.connect('mongodb+srv://irontitou5:voltron123@cluster0.4o8io.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect(DB_CONNECTION);
 const db = mongoose.connection;
 
 db.on('error', 

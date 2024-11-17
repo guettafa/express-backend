@@ -28,12 +28,22 @@ openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert
 ```
 
 ## Create .env file
-The .env file should be in project root. 
+The .env.prod & .env.test file should be in project root. 
 
+### .env.prod
 ```sh
 # Free to you to change values by anything you want
+DB_CONNECTION=mongodb+srv://username:password@cluster0.4o8io.mongodb.net/prod_db?retryWrites=true&w=majority&appName=Cluster0
 SECRET_KEY=k3llyR0s3tr1ckster 
 PORT=3000
+NODE_ENV=prod
+```
+### .env.test
+```sh
+DB_CONNECTION=mongodb+srv://username:password@cluster0.4o8io.mongodb.net/test_db?retryWrites=true&w=majority&appName=Cluster0
+SECRET_KEY=SecretKeyForTest 
+PORT=4000
+NODE_ENV=test
 ```
 
 # Start 
