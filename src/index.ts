@@ -59,15 +59,17 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
 });
 
+
 // HTTPS
 https
-    .createServer(
-        {
-            key: fs.readFileSync("./certs/server.key"),
-            cert: fs.readFileSync("./certs/server.cert"),
-        }, app
-    )
-    .listen(PORT, () => {
-        console.log(`Listening on port ${PORT}`);
-    });
+.createServer(
+  {
+    key: fs.readFileSync("./certs/server.key"),
+    cert: fs.readFileSync("./certs/server.cert"),
+  }, app
+)
+.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
 
+export default app;
