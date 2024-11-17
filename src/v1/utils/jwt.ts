@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Role } from "../models/user";
-import { envConfig } from "../config/config";
+import { envConfig } from "../../config/config";
 
 const SECRET_KEY = envConfig.jwt_secret;
 

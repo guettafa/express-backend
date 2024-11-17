@@ -1,6 +1,6 @@
 import winston from "winston";
 
-const LOG_FOLDER = "./src/logs/";
+const LOG_FOLDER = "./src/v2/logs/";
 const ALERT_LOG_FILE  = LOG_FOLDER  + "alerts.log";
 const ERROR_LOG_FILE  = LOG_FOLDER  + "errors.log";
 

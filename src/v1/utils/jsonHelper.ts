@@ -28,5 +28,5 @@ export const addSampleProducts = async ()  => {
                 id: json.id
             }
         ));
-    saveJSON<Product>(products, "./src/data/products.json");
+    saveJSON<Product>(products, "./src/v1/data/products.json");
 }

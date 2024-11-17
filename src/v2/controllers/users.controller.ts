@@ -1,7 +1,7 @@
 import { Role, User } from "../models/user";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
 
-const PATH_JSON_USERS = "./src/data/users.json";
+const PATH_JSON_USERS = "./src/v2/data/users.json";
 
 let users: User[] = readJSON<User>(PATH_JSON_USERS);
 

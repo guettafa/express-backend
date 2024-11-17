@@ -1,7 +1,7 @@
 import { Product } from "../models/product";
 import { readJSON, saveJSON } from "../utils/jsonHelper";
 
-const PATH_JSON_PRODUCTS = "./src/data/products.json";
+const PATH_JSON_PRODUCTS = "./src/v1/data/products.json";
 
 let products: Product[] = readJSON<Product>(PATH_JSON_PRODUCTS);
 

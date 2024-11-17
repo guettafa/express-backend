@@ -1,6 +1,6 @@
 import express, { Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
-import { envConfig } from "../config/config";
+import { envConfig } from "../../config/config";
 import { Role } from "../models/user";
 
 // Auth middleware
