@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=test ts-node-dev --respawn src/index.ts",
-    "test": "jest"
+    "test":  "jest" 
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
