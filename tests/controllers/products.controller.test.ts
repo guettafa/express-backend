@@ -39,12 +39,8 @@ describe("GET Products", () => {
     await get_product(404, true, true, "abcdefghijklmnopqrstuv");
   })
 
-  it("Should not retrieve all products - 401 because there's no token", async () => {
-    await get_product(401, false, false); // has no token
-  });
-  
-  it("Should retrieve all products - 200 because token is valid", async () => {
-    await get_product(200, false, true); // has token and is an employee 
+  it("Should retrieve all products - 200 no need token ", async () => {
+    await get_product(200, false, false);
   });
   
   it("Should retrieve the product with title swagman - 200 because have token", async () => {

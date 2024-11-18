@@ -14,8 +14,8 @@
     "winston": "^3.15.0"
   },
   "scripts": {
-    "start": "NODE_ENV=test ts-node-dev --respawn src/index.ts",
-    "test": "jest",
+    "start": "ts-node-dev --respawn src/index.ts",
+    "test": "NODE_ENV=test jest",
     "test:charge": "npx artillery run artillery-load-test.yml"
   },
   "devDependencies": {
