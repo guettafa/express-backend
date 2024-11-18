@@ -1,5 +1,5 @@
 config:
-  target: 'http://localhost:4000'
+  target: 'http://localhost:3000'
   http:
     # To mimic web browser
     maxSockets: 5
