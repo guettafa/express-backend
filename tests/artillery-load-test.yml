@@ -1,0 +1,32 @@
+config:
+  target: 'http://localhost:4000'
+  http:
+    # To mimic web browser
+    maxSockets: 5
+    timeout: 500
+  phases:
+    - duration: 50
+      arrivalRate: 5
+scenarios:
+  - flow:
+    - get: 
+        url: "/"
+        expect:
+          - statusCode: 200
+    - post:
+        url: "/api/v2/auth/login"
+        json: 
+          usernameOrEmail: 'swag'
+          password: 'swag123'
+        capture:
+          json: "$.token"
+          as: token
+        log: token
+        expect:
+          - statusCode: 200
+    - get:
+        url: "/api/v2/products/"
+    - get:
+        headers:
+          Authorization: "Bearer {{ token }}"
+        url: "/api/v2/products/swagman"

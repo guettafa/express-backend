@@ -21,7 +21,6 @@ beforeAll( async () => {
   expect(res_empl.status).toBe(200); expect(res_gest.status).toBe(200);
 });
 
-
 describe("POST Products", () => {
   
   it("Should not add a new product - 403 because is employee only", async () => {

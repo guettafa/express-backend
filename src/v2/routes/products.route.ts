@@ -20,7 +20,7 @@ const router = express.Router();
  *       401:
  *         description: Not even authenticated
  */
-router.get("/", checkAccess, async (req: Request, res: Response) => {
+router.get("/", async (req: Request, res: Response) => {
     res.json(await getProducts());
 });
 
