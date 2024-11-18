@@ -19,7 +19,7 @@ import { envConfig, swaggerOptions } from "./config/config";
 import { addSampleProducts as addSampleProductsV1 } from "./v1/utils/jsonHelper";
 import mongoose from "mongoose";
 
-const PORT = envConfig.port;
+const PORT = envConfig.port!;
 const DB_CONNECTION = envConfig.db_connection!;
 
 const app = express();
@@ -69,6 +69,6 @@ https
     cert: fs.readFileSync("./certs/server.cert"),
   }, app
 )
-.listen(PORT, () => {
+.listen(parseInt(PORT), () => {
   console.log(`Listening on port ${PORT}`);
 });
