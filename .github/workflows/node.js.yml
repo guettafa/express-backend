@@ -26,7 +26,7 @@ jobs:
       run: npm i
 
     - name: Create Certificates
-      run: openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert
+      run: openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert -subj '/C=Canada/L=Montreal/CN=cegepmv'
 
     - name: Testing Stage
       run: npm test
