@@ -84,7 +84,7 @@ router.post("/register", async (req: Request, res: Response) => {
     if (isValidEmail(email)) {
         const hashedPassword = await bcrypt.hash(password, 15);
 
-        res.json({message: addUser(username, email, hashedPassword)});
+        res.status(201).json({message: addUser(username, email, hashedPassword)});
         logger.info(`New account has been created with email ${email}`);
     } else {
         res.status(500).json({message: 'Email is in the wrong format'});
