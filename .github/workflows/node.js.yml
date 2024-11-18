@@ -29,4 +29,8 @@ jobs:
       run: openssl req -nodes -new -x509 -keyout certs/server.key -out certs/server.cert -subj '/C=CA/L=Montreal/CN=cegepmv'
 
     - name: Testing Stage
+      env:
+        DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        PORT: ${{ secrets.PORT }}
       run: npm test
