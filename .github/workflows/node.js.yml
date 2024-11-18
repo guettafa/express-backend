@@ -21,11 +21,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+
+    - name: Install deps
       run: npm i
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
 
     - name: Testing Stage
       run: npm test
