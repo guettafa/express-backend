@@ -61,7 +61,6 @@ app.get("/", (req: Request, res: Response) => {
 
 export default app;
 
-// // HTTPS
 // https
 // .createServer(
 //   {

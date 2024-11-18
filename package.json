@@ -15,8 +15,8 @@
   },
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
-    "test": "NODE_ENV=test jest",
-    "test:charge": "npx artillery run artillery-load-test.yml"
+    "test:unit": "NODE_ENV=test jest",
+    "test:load": "npx artillery run artillery-load-test.yml"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
