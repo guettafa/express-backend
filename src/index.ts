@@ -69,6 +69,6 @@ https
     cert: fs.readFileSync("./certs/server.cert"),
   }, app
 )
-.listen(parseInt(PORT), () => {
+.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
