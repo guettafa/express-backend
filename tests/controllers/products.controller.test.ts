@@ -28,9 +28,9 @@ describe("POST Products", () => {
     await post_product(403, false); 
   });
   
-  // it("Should add a new product - 201 Product is created", async () => {
-  //   await post_product(201, true);
-  // });
+  it("Should add a new product - 201 Product is created", async () => {
+    await post_product(201, true);
+  });
 });
   
   
@@ -59,9 +59,14 @@ describe("GET Products", () => {
 
 describe("DELETE Product", () => {
   
-  it("Should delete the product associated with the title - ", () => {
-    delete_product(204, true, 'swagman');
-  })
+  it("Should delete the product associated with the title - ", async () => {
+    await request(app)
+      .delete(API_ENDPOINT + "swagman")
+      .set("Authorization", 'Bearer ' + token_gestionnaire)
+      .expect(204)
+
+    await get_product(404, true, true, "swagman");
+  });
 });
 
 
@@ -92,16 +97,3 @@ const get_product = async (expected_status: number, isGestionnaire: boolean, has
 const put_product = async (expected_status: number, isGestionnaire: boolean) => {
   // do something
 } 
-
-const delete_product = async (expected_status: number, isGestionnaire: boolean, title: string) => {
-  const ENDPOINT = API_ENDPOINT + title;
-
-  await request(app)
-    .delete(ENDPOINT)
-    .set("Authorization", "Bearer" + (isGestionnaire ? token_gestionnaire : token_employee))
-    .expect(expected_status);
-  
-  const res = await get_product(404, true, true, title);
-
-  expect(res.body).toBe(null);
-}
