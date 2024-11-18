@@ -89,18 +89,32 @@ router.get("/:title", checkAccess, async (req: Request, res: Response) => {
  *       403:
  *         description: Authenticated user is not a gestionnaire
  */
+// router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
+//     const product: IProduct = {...req.body};
+//     try {
+//       if (isValidProduct(product)) {
+//           res.status(201).json({message: addProduct(product)});
+//           logger.info(`Product has been added - ${product.title}`);
+//       } else {
+//           res.status(400).json({message: "Product couldn't be added - Wrong format"}); 
+//           logger.error(`Product can't be added - Wrong format : ${product}`);
+//       }
+//     } catch (error) {
+//       res.status(500).json({message: "Internal server error - Can't add the product"});
+//     }
+// });
+
 router.post("/", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product: IProduct = {...req.body};
     try {
-      if (isValidProduct(product)) {
-          res.status(201).json({message: addProduct(product)});
-          logger.info(`Product has been added - ${product.title}`);
-      } else {
-          res.status(400).json({message: "Product couldn't be added - Wrong format"}); 
-          logger.error(`Product can't be added - Wrong format : ${product}`);
-      }
-    } catch (error) {
-      res.status(500).json({message: "Internal server error - Can't add the product"});
+      const success = await addProduct(product)
+
+      logger.info(`Product has been added - ${product.title}`);
+      res.status(201).json({message: success});
+    } 
+    catch (error) {
+      logger.error(`Product can't be added - Wrong format : ${product} - Reason : ${error}`);
+      res.status(500).json({message: `Can't add the product - ${error}`});
     }
 });
 

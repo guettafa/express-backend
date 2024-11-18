@@ -11,8 +11,7 @@ export const getProduct = async (title: string) => {
 }
 
 export const addProduct = async (product: IProduct)=> {
-    const newProduct = new Products(product);
-    newProduct.save();
+    await new Products(product).save();
 
     return "Added Sucessfully";
 }
