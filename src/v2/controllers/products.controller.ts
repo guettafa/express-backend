@@ -7,7 +7,7 @@ export const getProducts = async () => {
 }
 
 export const getProduct = async (title: string) => {
-  return Products.findOne({ title: title}); // find by title
+  return await Products.findOne({ title: title}); // find by title
 }
 
 export const addProduct = async (product: IProduct)=> {
@@ -24,6 +24,6 @@ export const updateProduct = async (oldProduct: IProduct, newProduct: IProduct) 
 }
 
 export const deleteProduct = async (title: string) => {
-    await Products.findOneAndDelete({ title: title});
+    await Products.deleteOne({title: title});
     return `Product ${title} has been deleted with success`;
 }

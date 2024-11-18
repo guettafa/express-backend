@@ -5,6 +5,7 @@ import { IProduct } from "../interfaces/Iproduct";
 import { checkAccess, isGestionnaire } from "../middlewares/auth.middleware";
 import { logger } from "../utils/logger";
 import { isValidProduct } from "../utils/regex";
+import { NotFoundError } from "rxjs";
 
 const router = express.Router();
 
@@ -44,6 +45,7 @@ router.get("/", checkAccess, async (req: Request, res: Response) => {
 router.get("/:title", checkAccess, async (req: Request, res: Response) => {
     try {
       const product = await getProduct(req.params.title);
+      if (product == null) throw NotFoundError;
       res.json(product);
     } catch (error) {
       res.status(404).json({message: "Product not found"});
@@ -190,7 +192,7 @@ router.put("/:title", checkAccess, isGestionnaire, async (req: Request, res: Res
 router.delete("/:title", checkAccess, isGestionnaire, async (req: Request, res: Response) => {
     const product = req.params.title;
     try {
-        res.status(204).json({message: deleteProduct(product)});
+        res.status(204).json({message: await deleteProduct(product)});
         logger.info(`Product with id ${product} has been deleted`);
     } catch (error) {
         res.status(404).json({message: `Product not found - ${error}`});
