@@ -16,7 +16,7 @@ import https from "https";
 import fs from "fs";
 import { envConfig, swaggerOptions } from "./config/config";
 
-import { addSampleProducts as addSampleProductsV1 } from "./v1/utils/jsonHelper";
+import { addSampleProducts } from "./v1/utils/jsonHelper";
 import mongoose from "mongoose";
 
 const PORT = envConfig.port!;
@@ -69,5 +69,6 @@ export default app;
 //   }, app
 // )
 app.listen(PORT, () => {
+  addSampleProducts();
   console.log(`Listening on port ${PORT}`);
 });
