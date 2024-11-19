@@ -16,7 +16,7 @@
   "scripts": {
     "start": "ts-node-dev --respawn src/index.ts",
     "test:unit": "NODE_ENV=test jest",
-    "test:load": "npx artillery run tests/artillery-load-test.yml"
+    "test:load": "npx artillery run tests/load/artillery-load-test.yml --output tests/load/artillery-output.json"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
