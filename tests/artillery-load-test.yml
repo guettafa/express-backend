@@ -5,7 +5,7 @@ config:
     maxSockets: 5
     timeout: 500
   phases:
-    - duration: 50
+    - duration: 10
       arrivalRate: 5
 scenarios:
   - flow:
