@@ -40,6 +40,6 @@ jobs:
       env:
         DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
-        PORT: ${{ secres.PORT }}
+        PORT: ${{ secrets.PORT }}
       run: npm start | npm run test:load &
     
