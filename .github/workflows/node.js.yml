@@ -41,5 +41,5 @@ jobs:
         DB_CONNECTION: ${{ secrets.DB_CONNECTION }}
         SECRET_KEY: ${{ secrets.SECRET_KEY }}
         PORT: 3000
-      run: npm start | npm run test:load
+      run: npm start & | npm run test:load
     
