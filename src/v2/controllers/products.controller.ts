@@ -11,18 +11,16 @@ export const getProduct = async (title: string) => {
 }
 
 export const addProduct = async (product: IProduct)=> {
-    await new Products(product).save();
-
-    return "Added Sucessfully";
+  await new Products(product).save();
+  return "Added Sucessfully";
 }
 
-// TO FIX
-export const updateProduct = async (oldProduct: IProduct, newProduct: IProduct) => {
-    await Products.updateOne({ title: oldProduct})
-    return "Updated Sucessfully";
+export const updateProduct = async (title: string, newProduct: IProduct) => {
+  await Products.findOneAndUpdate({ title: title}, newProduct);
+  return "Updated Sucessfully";
 }
 
 export const deleteProduct = async (title: string) => {
-    await Products.deleteOne({title: title});
-    return `Product ${title} has been deleted with success`;
+  await Products.deleteOne({title: title});
+  return `Product ${title} has been deleted with success`;
 }

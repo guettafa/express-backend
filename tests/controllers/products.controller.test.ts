@@ -32,7 +32,6 @@ describe("POST Products", () => {
   });
 });
   
-  
 describe("GET Products", () => {
   
   it("Should not retrieve the product because it dosnt't exist - 404 no product found", async () => {
@@ -50,6 +49,27 @@ describe("GET Products", () => {
   it("Should not retrieve the product with title swagman - 401 because no token", async () => {
     await get_product(401, false, false, "swagman"); // has no token
   });
+});
+
+describe("UPDATE Product", () => {
+
+  it("Should change description of product", async () => {
+    await request(app)
+      .put(API_ENDPOINT + "swagman")
+      .set("Authorization", 'Bearer ' + token_gestionnaire)
+      .send(
+        {
+          "title": "swagman",
+          "description": "updated description",
+          "quantity": 5,
+          "category": "BestProduct",
+          "price": 12.5 
+        }
+      ).expect(200)
+
+    expect((await get_product(200, true, true, "swagman")).body.description)
+      .toBe("updated description")
+  })
 });
 
 describe("DELETE Product", () => {

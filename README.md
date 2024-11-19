@@ -21,6 +21,9 @@ git clone https://github.com/guettafa/express-backend.git
 npm install 
 ```
 
+### Enable HTTPS
+#### DONT FORGET TO UNCOMMENT THE HTTPS PART IN src/index.ts
+
 3. Generate Cert + Key for HTTPS
 ```sh
 # Execute this command in project root
@@ -51,6 +54,18 @@ Execute command `npm start` on project root to start the server
 
 ```sh
 npm start 
+```
+
+# Run Tests with Jest + SuperTest
+```sh
+# it will generate a coverage report in /tests/coverage/
+npm run test:unit
+```
+
+# Run Load Tests with Artillery
+```sh
+# it will generate a .json file as report in /tests/load/
+npm run test:load
 ```
 
 # Look by yourself !

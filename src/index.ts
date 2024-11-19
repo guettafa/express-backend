@@ -52,8 +52,9 @@ app.use("/api/v1", v1);
 v2.use("/products", productsRoutesV2, )
 v2.use("/users", usersRoutesV2)
 v2.use("/auth", authRoutesV2);
-v2.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 app.use("/api/v2", v2);
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Hello World");
@@ -67,7 +68,12 @@ export default app;
 //     key: fs.readFileSync("./certs/server.key"),
 //     cert: fs.readFileSync("./certs/server.cert"),
 //   }, app
-// )
+// ).listen(PORT, () => {
+//   addSampleProducts();
+//   console.log(`Listening on port ${PORT}`);
+// });
+
+
 app.listen(PORT, () => {
   addSampleProducts();
   console.log(`Listening on port ${PORT}`);

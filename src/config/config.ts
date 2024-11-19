@@ -12,13 +12,15 @@ export const envConfig = {
 }
 
 export const swaggerOptions = {
-    definition: {
+    definition: 
+    {
       openapi: '3.0.0',
-      info: {
+      info: 
+      {
         title: 'Product API',
         version: '1.0.0',
         description: 'A simple API to manage products',
       },
     },
-    apis: ['./src/v2/routes/*.route.ts'],
+    apis: ['./src/v2/routes/*.route.ts', './src/v1/routes/*.route.ts'],
 };
