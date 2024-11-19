@@ -22,7 +22,7 @@ npm install
 ```
 
 ### Enable HTTPS
-#### DONT FORGET TO UNCOMMENT THE HTTPS PART IN src/index.ts
+#### DONT FORGET TO UNCOMMENT THE HTTPS PART IN src/index.ts to enable HTTPS
 
 3. Generate Cert + Key for HTTPS
 ```sh
@@ -69,15 +69,17 @@ npm run test:load
 ```
 
 # Look by yourself !
-You can check if everything worked as planned by going at `https://localhost:3000`
-You can even check all endpoints by visiting `https://localhost:3000/api/v1/api-docs`
+You can check if everything worked as planned by going at `http://localhost:3000` or 
+
+
+# Swagger
+### You can even check all endpoints by visiting `http://localhost:3000/api-docs`
 
 ![swagger](assets/swagger.png)
 
-## Features
+# Coverage
+### Check the percentage of test coverage by opening the .html file `tests/coverage/Icov-repov/index.html`
 
-- JWT Authentication
-- CRUD operations
-- Middleware for error handling
-- Input validation
-- Simple logging
+![cov1](assets/cov1.png)
+![cov2](assets/cov2.png)
+![cov3](assets/cov3.png)
